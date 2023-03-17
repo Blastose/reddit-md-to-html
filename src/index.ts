@@ -3,11 +3,13 @@ import { superscript } from './rules/superscript';
 import { paragraph } from './rules/paragraph';
 import { heading } from './rules/heading';
 import { blockQuote } from './rules/blockQuote';
+import { brBackslash } from './rules/brBackslash';
 import SimpleMarkdown from 'simple-markdown';
 
 const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	spoiler,
 	superscript,
+	brBackslash,
 	paragraph,
 	heading,
 	blockQuote
