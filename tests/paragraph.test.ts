@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import { describe, test, expect } from 'vitest';
 import { converter } from '../src/index.js';
 
@@ -15,7 +16,7 @@ This planet is odd because`;
 a pretty neat idea.</p><p>This planet is odd because</p>`);
 	});
 
-	test('paragraph with &#x200B; breaks', () => {
+	test('text with &#x200B; breaks', () => {
 		const text = `Far out sun.
 
 &#x200b;
@@ -28,27 +29,25 @@ a pretty neat idea.
 This planet is odd because`;
 
 		const htmlResult = converter(text);
-		console.log(htmlResult);
-
 		expect(htmlResult).toBe(`<p>Far out sun.</p><p>​</p><p>Orbiting this is
 a pretty neat idea.</p><p>​</p><p>This planet is odd because</p>`);
 	});
 
-	test('paragraph with lines with 2 spaces after to make <br>', () => {
-		const text = `I'm looking for,  
-to ask some questions
+	test('text with &nbsp; breaks', () => {
+		const text = `Far out sun.
 
-If anyone knows  
-Please let me know
+&nbsp;
 
-Thanks,  
-and enjoy life
-`;
+Orbiting this is
+a pretty neat idea.
+
+&nbsp;
+
+This planet is odd because`;
 
 		const htmlResult = converter(text);
 
-		expect(htmlResult).toBe(
-			'<p>I&#x27;m looking for,<br>to ask some questions</p><p>If anyone knows<br>Please let me know</p><p>Thanks,<br>and enjoy life</p>'
-		);
+		expect(htmlResult).toBe(`<p>Far out sun.</p><p>&nbsp;</p><p>Orbiting this is
+a pretty neat idea.</p><p>&nbsp;</p><p>This planet is odd because</p>`);
 	});
 });
