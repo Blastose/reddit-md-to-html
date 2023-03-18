@@ -23,15 +23,21 @@ describe('superscript', () => {
 		);
 	});
 
-	test('superscripts with brackets', () => {
+	test('superscript with brackets', () => {
 		const htmlResult = converter('^(superscript is cool)');
 		expect(htmlResult).toBe('<p><sup>superscript is cool</sup></p>');
 	});
 
+	test('superscript with brackets and strong', () => {
+		const htmlResult = converter('^(some text here + __bolded__)');
+		expect(htmlResult).toBe('<p><sup>some text here + <strong>bolded</strong></sup></p>');
+	});
+
 	test('superscript with em', () => {
 		const htmlResult = converter('^(superscript-_+_++_+_++++___+_+__******#**!#@$#${}[])');
+
 		expect(htmlResult).toBe(
-			'<sup>superscript-<em>+</em>++<em>+</em>++++<strong><em>+</em>+</strong>***<em>**#</em>*!#@$#${}[]</sup>'
+			'<p><sup>superscript-</sup><sup><em>+_++_+_++++___+_+</em></sup><sup>_****</sup><sup><strong>#</strong></sup><sup>!#@$#${}[]</sup></p>'
 		);
 	});
 });
