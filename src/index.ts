@@ -4,6 +4,7 @@ import { paragraph } from './rules/paragraph';
 import { heading } from './rules/heading';
 import { blockQuote } from './rules/blockQuote';
 import { brBackslash } from './rules/brBackslash';
+import { u } from './rules/u';
 import SimpleMarkdown from 'simple-markdown';
 
 const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
@@ -12,7 +13,8 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	brBackslash,
 	paragraph,
 	heading,
-	blockQuote
+	blockQuote,
+	u
 });
 
 const parser = SimpleMarkdown.parserFor(rules);
