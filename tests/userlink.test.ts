@@ -7,6 +7,11 @@ describe('userlink', () => {
 		expect(htmlResult).toBe('<p><a href="/u/jimmy">/u/jimmy</a></p>');
 	});
 
+	test('userlink with less than 2 characters in username does not output a', () => {
+		const htmlResult = converter('/u/y');
+		expect(htmlResult).toBe('<p>/u/y</p>');
+	});
+
 	test('userlink with u/', () => {
 		const htmlResult = converter('u/jimmy');
 		expect(htmlResult).toBe('<p><a href="/u/jimmy">u/jimmy</a></p>');

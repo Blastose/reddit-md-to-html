@@ -12,6 +12,18 @@ describe('redditlink', () => {
 		expect(htmlResult).toBe('<p><a href="/r/learnprogramming">r/learnprogramming</a></p>');
 	});
 
+	test('redditlink with less than 2 characters in subreddit name does not output a', () => {
+		const htmlResult = converter('/r/a');
+		expect(htmlResult).toBe('<p>/r/a</p>');
+	});
+
+	test('redditlink with more than 24 characters in subredditname only outputs the first 24 characters', () => {
+		const htmlResult = converter('/r/aabbcceeffgghhyyuuiiooppa');
+		expect(htmlResult).toBe(
+			'<p><a href="/r/aabbcceeffgghhyyuuiioopp">/r/aabbcceeffgghhyyuuiioopp</a>a</p>'
+		);
+	});
+
 	test('bolded list redditlink', () => {
 		const htmlResult = converter('* **/r/OtonariNoTenshiSama**');
 		expect(htmlResult).toBe(

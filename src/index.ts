@@ -6,6 +6,7 @@ import { blockQuote } from './rules/blockQuote';
 import { brBackslash } from './rules/brBackslash';
 import { u } from './rules/u';
 import { redditlink } from './rules/redditlink';
+import { userlink } from './rules/userlink';
 import { link } from './rules/link';
 import { autolink } from './rules/autolink';
 import { url } from './rules/url';
@@ -16,6 +17,7 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	superscript,
 	brBackslash,
 	redditlink,
+	userlink,
 	paragraph,
 	heading,
 	blockQuote,
