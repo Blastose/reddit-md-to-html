@@ -7,9 +7,11 @@ import { brBackslash } from './rules/brBackslash';
 import { u } from './rules/u';
 import { redditlink } from './rules/redditlink';
 import { userlink } from './rules/userlink';
+import { nonOrderedList } from './rules/nonOrderedList';
 import { link } from './rules/link';
 import { autolink } from './rules/autolink';
 import { url } from './rules/url';
+import { list } from './rules/list';
 import SimpleMarkdown from 'simple-markdown';
 
 const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
@@ -18,13 +20,15 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	brBackslash,
 	redditlink,
 	userlink,
+	nonOrderedList,
 	paragraph,
 	heading,
 	blockQuote,
 	u,
 	link,
 	autolink,
-	url
+	url,
+	list
 });
 
 const parser = SimpleMarkdown.parserFor(rules);
