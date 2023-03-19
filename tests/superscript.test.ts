@@ -33,6 +33,7 @@ describe('superscript', () => {
 		expect(htmlResult).toBe('<p><sup>some text here + <strong>bolded</strong></sup></p>');
 	});
 
+	// Inconsistent with both new and old reddit
 	test('superscript with em', () => {
 		const htmlResult = converter('^(superscript-_+_++_+_++++___+_+__******#**!#@$#${}[])');
 

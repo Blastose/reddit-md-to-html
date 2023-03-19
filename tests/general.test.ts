@@ -1,15 +1,29 @@
 import { describe, test, expect } from 'vitest';
-import { htmlOutput, parse } from '../src/index.js';
+import { converter } from '../src/index.js';
 
 describe('general', () => {
-	test('heading with bolded links', () => {
-		const text = `##[**r/arknights Wiki**](/r/arknights/wiki/index) - A compilation of many tools, resources, and guides on various topics.
-##[**Frequently Asked Questions**](/r/arknights/comments/fwmq7u/frequently_asked_questions_rarknights_faq/)
-`;
+	test('bold-itatlic', () => {
+		const htmlResult = converter(
+			'It is ***error*** only, and not ___truth___, that shrinks from inquiry.'
+		);
 
-		const htmlResult = htmlOutput(parse(text));
+		// em strong order is reversed in new reddit, but visually the result is the same
 		expect(htmlResult).toBe(
-			'<h2><a href="/r/arknights/wiki/index"><strong>r/arknights Wiki</strong></a> - A compilation of many tools, resources, and guides on various topics.</h2><h2><a href="/r/arknights/comments/fwmq7u/frequently_asked_questions_rarknights_faq/"><strong>Frequently Asked Questions</strong></a></h2>'
+			'<p>It is <em><strong>error</strong></em> only, and not <em><strong>truth</strong></em>, that shrinks from inquiry.</p>'
+		);
+	});
+
+	test('bolded parts of word', () => {
+		const htmlResult = converter('This is totally sub*der*ma**togly**phic.');
+		expect(htmlResult).toBe('<p>This is totally sub<em>der</em>ma<strong>togly</strong>phic.</p>');
+	});
+
+	test('strikethrough', () => {
+		const htmlResult = converter(
+			"The greatest thing you'll ever learn is just to ~~love~~ reddit and be ~~loved~~ reddited in return."
+		);
+		expect(htmlResult).toBe(
+			'<p>The greatest thing you&#x27;ll ever learn is just to <del>love</del> reddit and be <del>loved</del> reddited in return.</p>'
 		);
 	});
 });
