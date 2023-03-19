@@ -13,5 +13,5 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 			title: capture[3]
 		};
 		return link;
-	} as SimpleMarkdown.ParseFunction
+	} satisfies SimpleMarkdown.ParseFunction
 });

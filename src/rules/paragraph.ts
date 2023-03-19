@@ -23,6 +23,6 @@ export const paragraph: SimpleMarkdownRule = Object.assign(
 			}
 
 			return htmlTag('p', output(node.content, state));
-		} as SimpleMarkdownRule['html']
+		} satisfies SimpleMarkdownRule['html']
 	}
 );

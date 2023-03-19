@@ -5,5 +5,5 @@ import { SimpleMarkdownRule } from './ruleType';
 export const u: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.u, {
 	html: function (node, output, state) {
 		return htmlTag('strong', output(node.content, state));
-	} as SimpleMarkdownRule['html']
+	} satisfies SimpleMarkdownRule['html']
 });
