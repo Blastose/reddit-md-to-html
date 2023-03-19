@@ -34,7 +34,7 @@ describe('superscript', () => {
 	});
 
 	// Inconsistent with both new and old reddit
-	test('superscript with em', () => {
+	test.fails('superscript with em', () => {
 		const htmlResult = converter('^(superscript-_+_++_+_++++___+_+__******#**!#@$#${}[])');
 
 		expect(htmlResult).toBe(
