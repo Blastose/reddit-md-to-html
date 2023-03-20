@@ -33,6 +33,15 @@ describe('superscript', () => {
 		expect(htmlResult).toBe('<p><sup>some text here + <strong>bolded</strong></sup></p>');
 	});
 
+	// New reddit only shows one sup, while old reddit has nested sup
+	// The converter matches new reddit in this case
+	test('superscript with several ^ in a row', () => {
+		const htmlResult = converter('^^^^text and ^^^^^some ^^^more^^^text');
+		expect(htmlResult).toBe(
+			'<p><sup>text</sup> and <sup>some</sup> <sup>more</sup><sup>text</sup></p>'
+		);
+	});
+
 	// Inconsistent with both new and old reddit
 	test.fails('superscript with em', () => {
 		const htmlResult = converter('^(superscript-_+_++_+_++++___+_+__******#**!#@$#${}[])');

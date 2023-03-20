@@ -3,7 +3,7 @@ import { SimpleMarkdownRule } from './ruleType.js';
 
 export const superscript: SimpleMarkdownRule = {
 	order: SimpleMarkdown.defaultRules.blockQuote.order - 0.5,
-	match: SimpleMarkdown.inlineRegex(/^\^\(([^)]+)\)|^\^([^\s^]+)/),
+	match: SimpleMarkdown.inlineRegex(/^\^+\(([^)]+)\)|^\^+([^\s^]+)/),
 	parse: function (capture, parse, state) {
 		return {
 			content: parse(capture[1] ?? capture[2], state)
