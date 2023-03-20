@@ -3,7 +3,7 @@ import { SimpleMarkdownRule } from './ruleType.js';
 
 export const nbsp: SimpleMarkdownRule = {
 	order: SimpleMarkdown.defaultRules.hr.order - 0.5,
-	match: SimpleMarkdown.blockRegex(/^(&nbsp;)(?:\n*)/),
+	match: SimpleMarkdown.blockRegex(/^(&nbsp;)(?:\n*)/i),
 	parse: function (capture) {
 		return { content: capture[1] };
 	},

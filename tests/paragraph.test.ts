@@ -24,7 +24,7 @@ a pretty neat idea.</p><p>This planet is odd because</p>`);
 Orbiting this is
 a pretty neat idea.
 
-&#x200b;
+&#x200B;
 
 This planet is odd because`;
 
