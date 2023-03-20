@@ -59,6 +59,20 @@ describe('link', () => {
 		);
 	});
 
+	test('url by itself after other links', () => {
+		const text = `**Panther**  
+**Github**: [https://github.com/AliRn76/panther](https://github.com/AliRn76/panther)  
+**Documentation**: [https://pantherpy.github.io/](https://pantherpy.github.io/)  
+
+
+https://preview.redd.it/gtec70b1uroa1.png?width=831&format=png&auto=webp&v=enabled&s=08c1d9b71f3f555297432cc817dfa09d05c67c66`;
+
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			`<p><strong>Panther</strong><br><strong>Github</strong>: <a href="https://github.com/AliRn76/panther">https://github.com/AliRn76/panther</a><br><strong>Documentation</strong>: <a href="https://pantherpy.github.io/">https://pantherpy.github.io/</a>  </p><p><a href="https://preview.redd.it/gtec70b1uroa1.png?width=831&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=08c1d9b71f3f555297432cc817dfa09d05c67c66">https://preview.redd.it/gtec70b1uroa1.png?width=831&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=08c1d9b71f3f555297432cc817dfa09d05c67c66</a></p>`
+		);
+	});
+
 	// Fails on [Very little]; cannot handle [] without a second []
 	test.fails('reference link', () => {
 		const text = `[Very little] is needed to make a happy life;

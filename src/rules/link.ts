@@ -13,6 +13,7 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 			target: SimpleMarkdown.unescapeUrl(capture[2]),
 			title: capture[3]
 		};
+		state.link = false;
 		return link;
 	} satisfies SimpleMarkdown.ParseFunction,
 	html: function (node, output, state) {
