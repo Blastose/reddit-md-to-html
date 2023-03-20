@@ -73,3 +73,35 @@ it is all within yourself, in your <a href="https://www.reddit.com/r/ChangeMyVie
 		);
 	});
 });
+
+describe('url', () => {
+	test('normal url', () => {
+		const htmlResult = converter(`https://www.twitter.com/simdf/1329853254`);
+		expect(htmlResult).toBe(
+			'<p><a href="https://www.twitter.com/simdf/1329853254">https://www.twitter.com/simdf/1329853254</a></p>'
+		);
+	});
+
+	test('normal url with text surrounding', () => {
+		const htmlResult = converter(`Click this https://www.twitter.com/simdf/1329853254 to get`);
+		expect(htmlResult).toBe(
+			'<p>Click this <a href="https://www.twitter.com/simdf/1329853254">https://www.twitter.com/simdf/1329853254</a> to get</p>'
+		);
+	});
+
+	test('url with backslashes before underscores', () => {
+		const htmlResult = converter(String.raw`https://www.twitter.com/simdf\_sdjlkj/1329853254`);
+		expect(htmlResult).toBe(
+			'<p><a href="https://www.twitter.com/simdf_sdjlkj/1329853254">https://www.twitter.com/simdf_sdjlkj/1329853254</a></p>'
+		);
+	});
+
+	test('url with backslashes before underscores and text surrounding', () => {
+		const htmlResult = converter(
+			String.raw`See https://www.reddit.com/r/bugs/comments/nwv50z/old\_reddit\_users\_see\_thousands\_of\_broken\_links/`
+		);
+		expect(htmlResult).toBe(
+			'<p>See <a href="https://www.reddit.com/r/bugs/comments/nwv50z/old_reddit_users_see_thousands_of_broken_links/">https://www.reddit.com/r/bugs/comments/nwv50z/old_reddit_users_see_thousands_of_broken_links/</a></p>'
+		);
+	});
+});

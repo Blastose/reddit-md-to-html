@@ -12,6 +12,7 @@ import { link } from './rules/link';
 import { autolink } from './rules/autolink';
 import { url } from './rules/url';
 import { list } from './rules/list';
+import { text } from './rules/text';
 import SimpleMarkdown from 'simple-markdown';
 
 const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
@@ -28,7 +29,8 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	link,
 	autolink,
 	url,
-	list
+	list,
+	text
 });
 
 const parser = SimpleMarkdown.parserFor(rules);
