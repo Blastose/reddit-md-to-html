@@ -1,5 +1,5 @@
 import SimpleMarkdown from 'simple-markdown';
-import { SimpleMarkdownRule } from './ruleType';
+import { SimpleMarkdownRule } from './ruleType.js';
 
 export const userlink: SimpleMarkdownRule = {
 	order: SimpleMarkdown.defaultRules.url.order - 0.5,

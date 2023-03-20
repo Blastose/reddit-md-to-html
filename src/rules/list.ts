@@ -1,5 +1,5 @@
 import SimpleMarkdown from 'simple-markdown';
-import { SimpleMarkdownRule } from './ruleType';
+import { SimpleMarkdownRule } from './ruleType.js';
 
 // Match function and regex from https://github.com/ariabuckles/simple-markdown/blob/7fb8bb5943ee4e561fec17c2e271a327f4e86d64/src/index.js#L688
 // Modifies LIST_R regex to only match list items starting with `1.` and not `[#].`

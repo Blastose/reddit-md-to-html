@@ -1,18 +1,18 @@
-import { spoiler } from './rules/spoiler';
-import { superscript } from './rules/superscript';
-import { paragraph } from './rules/paragraph';
-import { heading } from './rules/heading';
-import { blockQuote } from './rules/blockQuote';
-import { brBackslash } from './rules/brBackslash';
-import { u } from './rules/u';
-import { redditlink } from './rules/redditlink';
-import { userlink } from './rules/userlink';
-import { nonOrderedList } from './rules/nonOrderedList';
-import { link } from './rules/link';
-import { autolink } from './rules/autolink';
-import { url } from './rules/url';
-import { list } from './rules/list';
-import { text } from './rules/text';
+import { spoiler } from './rules/spoiler.js';
+import { superscript } from './rules/superscript.js';
+import { paragraph } from './rules/paragraph.js';
+import { heading } from './rules/heading.js';
+import { blockQuote } from './rules/blockQuote.js';
+import { brBackslash } from './rules/brBackslash.js';
+import { u } from './rules/u.js';
+import { redditlink } from './rules/redditlink.js';
+import { userlink } from './rules/userlink.js';
+import { nonOrderedList } from './rules/nonOrderedList.js';
+import { link } from './rules/link.js';
+import { autolink } from './rules/autolink.js';
+import { url } from './rules/url.js';
+import { list } from './rules/list.js';
+import { text } from './rules/text.js';
 import SimpleMarkdown from 'simple-markdown';
 
 const rules = Object.assign({}, SimpleMarkdown.defaultRules, {

@@ -1,5 +1,5 @@
-import SimpleMarkdown, { sanitizeText } from 'simple-markdown';
-import { SimpleMarkdownRule } from './ruleType';
+import SimpleMarkdown from 'simple-markdown';
+import { SimpleMarkdownRule } from './ruleType.js';
 
 // Modifies original text rule to not output backslashes from urls
 export const text: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.text, {
@@ -8,6 +8,6 @@ export const text: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 			node.content = node.content.replace(/\\/g, '');
 		}
 
-		return sanitizeText(node.content);
+		return SimpleMarkdown.sanitizeText(node.content);
 	} satisfies SimpleMarkdown.HtmlNodeOutput
 });

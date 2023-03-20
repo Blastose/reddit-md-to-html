@@ -1,5 +1,5 @@
-import SimpleMarkdown, { htmlTag } from 'simple-markdown';
-import { SimpleMarkdownRule } from './ruleType';
+import SimpleMarkdown from 'simple-markdown';
+import { SimpleMarkdownRule } from './ruleType.js';
 
 // Modifies original paragraph rule to output <p> tags instead of <div> tags
 // Also converts &#x200b; to its unicode representation
@@ -10,7 +10,7 @@ export const paragraph: SimpleMarkdownRule = Object.assign(
 		html: function (node, output, state) {
 			if (node.content.length === 2) {
 				if (node.content[0].content === '&nbsp' && node.content[1].content === ';') {
-					return htmlTag('p', '&nbsp;');
+					return SimpleMarkdown.htmlTag('p', '&nbsp;');
 				}
 			} else if (node.content.length === 3) {
 				if (
@@ -18,11 +18,11 @@ export const paragraph: SimpleMarkdownRule = Object.assign(
 					node.content[1].content === '#x200b' &&
 					node.content[2].content === ';'
 				) {
-					return htmlTag('p', '​');
+					return SimpleMarkdown.htmlTag('p', '​');
 				}
 			}
 
-			return htmlTag('p', output(node.content, state));
+			return SimpleMarkdown.htmlTag('p', output(node.content, state));
 		} satisfies SimpleMarkdownRule['html']
 	}
 );

@@ -1,5 +1,5 @@
-import SimpleMarkdown, { blockRegex, htmlTag } from 'simple-markdown';
-import { SimpleMarkdownRule } from './ruleType';
+import SimpleMarkdown from 'simple-markdown';
+import { SimpleMarkdownRule } from './ruleType.js';
 
 // Rule to match `[#].` before the list rule so that they are not
 // parsed as ordered lists
@@ -9,7 +9,7 @@ export const nonOrderedList: SimpleMarkdownRule = {
 		if (state.notOrderedList) {
 			return null;
 		}
-		return blockRegex(/^((?!1\.)\d+\.[^\n]+)\n+/)(source, state, prevCapture);
+		return SimpleMarkdown.blockRegex(/^((?!1\.)\d+\.[^\n]+)\n+/)(source, state, prevCapture);
 	},
 	parse: function (capture, parse, state) {
 		state.notOrderedList = true;
@@ -18,6 +18,6 @@ export const nonOrderedList: SimpleMarkdownRule = {
 		};
 	},
 	html: function (node, output, state) {
-		return htmlTag('p', output(node.content, state));
+		return SimpleMarkdown.htmlTag('p', output(node.content, state));
 	}
 };

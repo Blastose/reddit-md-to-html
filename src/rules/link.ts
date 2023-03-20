@@ -1,5 +1,5 @@
-import SimpleMarkdown, { htmlTag, sanitizeUrl, unescapeUrl } from 'simple-markdown';
-import { SimpleMarkdownRule } from './ruleType';
+import SimpleMarkdown from 'simple-markdown';
+import { SimpleMarkdownRule } from './ruleType.js';
 
 // Modifies original link rule to add a state when parsing to tell other rules
 // that the text has already been ran through the link rule
@@ -10,17 +10,17 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 		state.link = true;
 		const link = {
 			content: parse(capture[1], state),
-			target: unescapeUrl(capture[2]),
+			target: SimpleMarkdown.unescapeUrl(capture[2]),
 			title: capture[3]
 		};
 		return link;
 	} satisfies SimpleMarkdown.ParseFunction,
 	html: function (node, output, state) {
 		const attributes = {
-			href: sanitizeUrl(node.target)?.replace(/\\/g, ''),
+			href: SimpleMarkdown.sanitizeUrl(node.target)?.replace(/\\/g, ''),
 			title: node.title
 		};
 
-		return htmlTag('a', output(node.content, state), attributes);
+		return SimpleMarkdown.htmlTag('a', output(node.content, state), attributes);
 	} satisfies SimpleMarkdown.HtmlNodeOutput
 });

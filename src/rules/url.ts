@@ -1,5 +1,5 @@
 import SimpleMarkdown from 'simple-markdown';
-import { SimpleMarkdownRule } from './ruleType';
+import { SimpleMarkdownRule } from './ruleType.js';
 
 // Modifies original url rule to ignore urls already parsed by the link rule
 export const url: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.url, {

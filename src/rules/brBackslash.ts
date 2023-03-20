@@ -1,10 +1,10 @@
-import SimpleMarkdown, { anyScopeRegex } from 'simple-markdown';
-import { SimpleMarkdownRule } from './ruleType';
+import SimpleMarkdown from 'simple-markdown';
+import { SimpleMarkdownRule } from './ruleType.js';
 
 // Like the original br rule, but also matches backslash and a newline (\\n)
 export const brBackslash: SimpleMarkdownRule = {
 	order: SimpleMarkdown.defaultRules.br.order,
-	match: anyScopeRegex(/^\\\n/),
+	match: SimpleMarkdown.anyScopeRegex(/^\\\n/),
 	parse: () => {
 		return {};
 	},

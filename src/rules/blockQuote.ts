@@ -1,5 +1,5 @@
-import SimpleMarkdown, { blockRegex } from 'simple-markdown';
-import { SimpleMarkdownRule } from './ruleType';
+import SimpleMarkdown from 'simple-markdown';
+import { SimpleMarkdownRule } from './ruleType.js';
 
 // Modifies original blockQuote rule to not match >!, since >! !<
 // is used for spoiler text
@@ -7,6 +7,6 @@ export const blockQuote: SimpleMarkdownRule = Object.assign(
 	{},
 	SimpleMarkdown.defaultRules.blockQuote,
 	{
-		match: blockRegex(/^( *>(?!!)[^\n]+(\n[^\n]+)*\n*)+\n{2,}/)
+		match: SimpleMarkdown.blockRegex(/^( *>(?!!)[^\n]+(\n[^\n]+)*\n*)+\n{2,}/)
 	}
 );
