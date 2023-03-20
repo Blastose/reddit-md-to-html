@@ -41,4 +41,14 @@ describe('redditlink', () => {
 			'<h2><a href="/r/arknights/wiki/index"><strong>r/arknights Wiki</strong></a> - A compilation of many tools, resources, and guides on various topics.</h2><h2><a href="/r/arknights/comments/fwmq7u/frequently_asked_questions_rarknights_faq/"><strong>Frequently Asked Questions</strong></a></h2>'
 		);
 	});
+
+	test('link', () => {
+		const text = `Are you a person?
+
+EDIT: oh damn, I think OP blocked me. Sorry, OP, I didn't mean any offence. r/programminghumor made me think it was a normal thing to say.`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<p>Are you a person?</p><p>EDIT: oh damn, I think OP blocked me. Sorry, OP, I didn&#x27;t mean any offence. <a href="/r/programminghumor">r/programminghumor</a> made me think it was a normal thing to say.</p>'
+		);
+	});
 });
