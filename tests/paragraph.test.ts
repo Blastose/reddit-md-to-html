@@ -66,4 +66,16 @@ When the door is so wide open?`;
 			`<p>Be empty of worrying.<br>Think of who created thought!</p><p>&nbsp;</p><p>Why do you stay in prison<br>When the door is so wide open?</p>`
 		);
 	});
+
+	test('inline &nbsp;', () => {
+		const text = 'A&nbsp;&nbsp;&nbsp;&nbsp;a a b';
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe('<p>A&nbsp;&nbsp;&nbsp;&nbsp;a a b</p>');
+	});
+
+	test('inline &#x200b;', () => {
+		const text = 'A&#x200b;&#x200b;&#x200b;&#x200b;a a b';
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe('<p>A​​​​a a b</p>');
+	});
 });
