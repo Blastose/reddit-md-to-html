@@ -58,6 +58,15 @@ function (b: number) {
 		);
 	});
 
+	test('4 spaces codeblock with 1 space at end', () => {
+		const text = `    <Dorohedoro>
+    <Golden Kamuy>
+ `;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(`<pre><code>&lt;Dorohedoro&gt;
+&lt;Golden Kamuy&gt;</code></pre>`);
+	});
+
 	test('triple backtick codeblock', () => {
 		const text = `\`\`\`
 function (a: string) {
