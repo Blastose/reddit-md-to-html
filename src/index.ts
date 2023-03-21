@@ -17,6 +17,7 @@ import { list } from './rules/list.js';
 import { text } from './rules/text.js';
 import { hr } from './rules/hr.js';
 import { table } from './rules/table.js';
+import { fence } from './rules/fence.js';
 import SimpleMarkdown from 'simple-markdown';
 
 const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
@@ -38,7 +39,8 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	list,
 	text,
 	hr,
-	table
+	table,
+	fence
 });
 
 const parser = SimpleMarkdown.parserFor(rules);
