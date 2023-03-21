@@ -38,6 +38,26 @@ https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior`;
 </blockquote></blockquote></blockquote><p>The datetime module has a template language that converts from days/weeks/months, etc.</p><p><a href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior">https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior</a></p>`);
 	});
 
+	test('4 spaces codeblock with empty line in between', () => {
+		const text = `    function (a: string) {
+        return a;
+    }
+    
+    function (b: number) {
+        return b;
+    }`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			`<pre><code>function (a: string) {
+    return a;
+}
+
+function (b: number) {
+    return b;
+}</code></pre>`
+		);
+	});
+
 	test('triple backtick codeblock', () => {
 		const text = `\`\`\`
 function (a: string) {
