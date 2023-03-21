@@ -8,8 +8,7 @@ import { u } from './rules/u.js';
 import { redditlink } from './rules/redditlink.js';
 import { userlink } from './rules/userlink.js';
 import { nonOrderedList } from './rules/nonOrderedList.js';
-import { nbsp } from './rules/nbsp.js';
-import { zeroWidthSpace } from './rules/zeroWidthSpace.js';
+import { specialCharacters } from './rules/specialCharacters.js';
 import { link } from './rules/link.js';
 import { autolink } from './rules/autolink.js';
 import { url } from './rules/url.js';
@@ -28,8 +27,7 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	redditlink,
 	userlink,
 	nonOrderedList,
-	nbsp,
-	zeroWidthSpace,
+	specialCharacters,
 	paragraph,
 	heading,
 	blockQuote,

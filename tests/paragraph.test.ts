@@ -78,4 +78,13 @@ When the door is so wide open?`;
 		const htmlResult = converter(text);
 		expect(htmlResult).toBe('<p>A​​​​a a b</p>');
 	});
+
+	test('superscript with &#32; spaces', () => {
+		const text =
+			'^{anime},&#32;<manga>,&#32;]LN[,&#32;|VN|&#32;|&#32;[FAQ](http://www.reddit.com/r/Roboragi/wiki/index)&#32;|&#32;[/r/](http://www.reddit.com/r/Roboragi/)&#32;|&#32;[Edit](https://www.reddit.com/r/Roboragi/wiki/index#wiki_i_made_a_mistake.2C_how_do_i_get_my_comment_reprocessed.3F)&#32;|&#32;[Mistake?](http://www.reddit.com/r/Roboragi/submit?selftext=true&title=[ISSUE]&text=/r/manga/comments/kl85b3/what_manga_have_you_read_this_week_and_what_do/ghe3ssl/)&#32;|&#32;[Source](https://github.com/Nihilate/Roboragi)&#32;|&#32;[Synonyms](https://www.reddit.com/r/Roboragi/wiki/synonyms)&#32;|&#32;[⛓](https://www.reddit.com/r/Roboragi/wiki/interestinglinks)&#32;|&#32;[♥](https://www.reddit.com/r/Roboragi/wiki/thanks)';
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<p><sup>{anime}, &lt;manga&gt;, ]LN[, |VN| | <a href="http://www.reddit.com/r/Roboragi/wiki/index">FAQ</a> | <a href="http://www.reddit.com/r/Roboragi/">/r/</a> | <a href="https://www.reddit.com/r/Roboragi/wiki/index#wiki_i_made_a_mistake.2C_how_do_i_get_my_comment_reprocessed.3F">Edit</a> | <a href="http://www.reddit.com/r/Roboragi/submit?selftext=true&amp;title=[ISSUE]&amp;text=/r/manga/comments/kl85b3/what_manga_have_you_read_this_week_and_what_do/ghe3ssl/">Mistake?</a> | <a href="https://github.com/Nihilate/Roboragi">Source</a> | <a href="https://www.reddit.com/r/Roboragi/wiki/synonyms">Synonyms</a> | <a href="https://www.reddit.com/r/Roboragi/wiki/interestinglinks">⛓</a> | <a href="https://www.reddit.com/r/Roboragi/wiki/thanks">♥</a></sup></p>'
+		);
+	});
 });
