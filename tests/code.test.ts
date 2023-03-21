@@ -15,6 +15,29 @@ describe('codeBlock', () => {
 		);
 	});
 
+	test('4 spaces codeblock and >>>', () => {
+		const text = `There are conversion functions in the datetime module.
+
+    >>> datetime.strptime("01", "%m").strftime("%B")
+    'January'
+    >>> datetime.strptime("02", "%m").strftime("%B")
+    'February'
+>>>
+
+The datetime module has a template language that converts from days/weeks/months, etc.
+
+https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior`;
+
+		const htmlResult = converter(text);
+
+		expect(htmlResult)
+			.toBe(`<p>There are conversion functions in the datetime module.</p><pre><code>&gt;&gt;&gt; datetime.strptime(&quot;01&quot;, &quot;%m&quot;).strftime(&quot;%B&quot;)
+&#x27;January&#x27;
+&gt;&gt;&gt; datetime.strptime(&quot;02&quot;, &quot;%m&quot;).strftime(&quot;%B&quot;)
+&#x27;February&#x27;</code></pre><blockquote><blockquote><blockquote>
+</blockquote></blockquote></blockquote><p>The datetime module has a template language that converts from days/weeks/months, etc.</p><p><a href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior">https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior</a></p>`);
+	});
+
 	test('triple backtick codeblock', () => {
 		const text = `\`\`\`
 function (a: string) {
