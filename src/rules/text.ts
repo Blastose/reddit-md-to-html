@@ -6,11 +6,9 @@ import { SimpleMarkdownRule } from './ruleType.js';
 // This is used for matching redditlinks like `r/programing` so the `r`
 // is not captured before the rest of the link
 export const text: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.text, {
-	match: function (source, state, prevCapture) {
-		return SimpleMarkdown.anyScopeRegex(
-			/^[\s\S]+?(?=[^0-9A-Za-z\s\u00c0-\uffff]|\n\n| {2,}\n|\w+(?::|\/)\S|$)/
-		)(source, state, prevCapture);
-	} satisfies SimpleMarkdown.MatchFunction,
+	match: SimpleMarkdown.anyScopeRegex(
+		/^[\s\S]+?(?=[^0-9A-Za-z\s\u00c0-\uffff]|\n\n| {2,}\n|\w+(?::|\/)\S|$)/
+	) satisfies SimpleMarkdown.MatchFunction,
 	html: function (node) {
 		if (node.content.match(/^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/)) {
 			node.content = node.content.replace(/\\/g, '');
