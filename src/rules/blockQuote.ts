@@ -9,7 +9,7 @@ export const blockQuote: SimpleMarkdownRule = Object.assign(
 	SimpleMarkdown.defaultRules.blockQuote,
 	{
 		match: SimpleMarkdown.blockRegex(
-			/^( {0,3}>(?!!)[^\n]*(\n[^\n]+)*\n*)+\n{2,}/
+			/^( {0,3}>(?!!).*?(?=\n\n|\n +\n))\n*/s
 		) satisfies SimpleMarkdown.MatchFunction
 	}
 );
