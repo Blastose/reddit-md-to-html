@@ -6,7 +6,6 @@ import { blockQuote } from './rules/blockQuote.js';
 import { brBackslash } from './rules/brBackslash.js';
 import { u } from './rules/u.js';
 import { redditlink } from './rules/redditlink.js';
-import { userlink } from './rules/userlink.js';
 import { nonOrderedList } from './rules/nonOrderedList.js';
 import { specialCharacters } from './rules/specialCharacters.js';
 import { link } from './rules/link.js';
@@ -25,7 +24,6 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	superscript,
 	brBackslash,
 	redditlink,
-	userlink,
 	nonOrderedList,
 	specialCharacters,
 	paragraph,

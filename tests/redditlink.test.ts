@@ -58,3 +58,25 @@ EDIT: oh damn, I think OP blocked me. Sorry, OP, I didn't mean any offence. r/pr
 		expect(htmlResult).toBe('<p>converter/function</p>');
 	});
 });
+
+describe('userlink', () => {
+	test('userlink with /u/', () => {
+		const htmlResult = converter('/u/jimmy');
+		expect(htmlResult).toBe('<p><a href="/u/jimmy">/u/jimmy</a></p>');
+	});
+
+	test('userlink with less than 2 characters in username does not output a', () => {
+		const htmlResult = converter('/u/y');
+		expect(htmlResult).toBe('<p>/u/y</p>');
+	});
+
+	test('userlink with u/', () => {
+		const htmlResult = converter('u/jimmy');
+		expect(htmlResult).toBe('<p><a href="/u/jimmy">u/jimmy</a></p>');
+	});
+
+	test('bolded list userlink', () => {
+		const htmlResult = converter('* **/u/jimmy**');
+		expect(htmlResult).toBe('<ul><li><strong><a href="/u/jimmy">/u/jimmy</a></strong></li></ul>');
+	});
+});
