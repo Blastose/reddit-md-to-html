@@ -3,10 +3,11 @@ import { SimpleMarkdownRule } from './ruleType.js';
 
 export const userlink: SimpleMarkdownRule = {
 	order: SimpleMarkdown.defaultRules.url.order - 0.5,
-	match: function (source, state) {
+	match: function (source, state, prevCapture) {
 		if (state.link) {
 			return null;
 		}
+		if (prevCapture.length !== 0 && prevCapture[prevCapture.length - 1] !== ' ') return null;
 		return source.match(/^\/u\/\w{2,}|^u\/\w{2,}/);
 	},
 	parse: function (capture) {

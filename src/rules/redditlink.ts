@@ -3,10 +3,11 @@ import { SimpleMarkdownRule } from './ruleType.js';
 
 export const redditlink: SimpleMarkdownRule = {
 	order: SimpleMarkdown.defaultRules.url.order - 0.5,
-	match: function (source, state) {
+	match: function (source, state, prevCapture) {
 		if (state.link) {
 			return null;
 		}
+		if (prevCapture.length !== 0 && prevCapture[prevCapture.length - 1] !== ' ') return null;
 		return source.match(/^\/r\/\w{2,24}|^r\/\w{2,24}/);
 	},
 	parse: function (capture) {
