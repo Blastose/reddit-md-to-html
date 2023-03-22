@@ -42,7 +42,7 @@ describe('redditlink', () => {
 		);
 	});
 
-	test('link', () => {
+	test('redditlink at start of sentence', () => {
 		const text = `Are you a person?
 
 EDIT: oh damn, I think OP blocked me. Sorry, OP, I didn't mean any offence. r/programminghumor made me think it was a normal thing to say.`;
@@ -50,5 +50,33 @@ EDIT: oh damn, I think OP blocked me. Sorry, OP, I didn't mean any offence. r/pr
 		expect(htmlResult).toBe(
 			'<p>Are you a person?</p><p>EDIT: oh damn, I think OP blocked me. Sorry, OP, I didn&#x27;t mean any offence. <a href="/r/programminghumor">r/programminghumor</a> made me think it was a normal thing to say.</p>'
 		);
+	});
+
+	test('does not match `text`r/`subreddit` in connected word', () => {
+		const text = `converter/function`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe('<p>converter/function</p>');
+	});
+});
+
+describe('userlink', () => {
+	test('userlink with /u/', () => {
+		const htmlResult = converter('/u/jimmy');
+		expect(htmlResult).toBe('<p><a href="/u/jimmy">/u/jimmy</a></p>');
+	});
+
+	test('userlink with less than 2 characters in username does not output a', () => {
+		const htmlResult = converter('/u/y');
+		expect(htmlResult).toBe('<p>/u/y</p>');
+	});
+
+	test('userlink with u/', () => {
+		const htmlResult = converter('u/jimmy');
+		expect(htmlResult).toBe('<p><a href="/u/jimmy">u/jimmy</a></p>');
+	});
+
+	test('bolded list userlink', () => {
+		const htmlResult = converter('* **/u/jimmy**');
+		expect(htmlResult).toBe('<ul><li><strong><a href="/u/jimmy">/u/jimmy</a></strong></li></ul>');
 	});
 });
