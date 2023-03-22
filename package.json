@@ -1,6 +1,6 @@
 {
 	"name": "reddit-md-to-html",
-	"version": "0.1.8",
+	"version": "0.1.9",
 	"description": "A markdown to html converter for Reddit-flavored markdown",
 	"repository": {
 		"type": "git",
@@ -21,7 +21,8 @@
 	"scripts": {
 		"build": "tsc",
 		"test": "vitest run",
-		"coverage": "vitest run --coverage"
+		"coverage": "vitest run --coverage",
+		"prepublishOnly": "tsc"
 	},
 	"keywords": [],
 	"files": [

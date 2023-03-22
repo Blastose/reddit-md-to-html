@@ -22,8 +22,8 @@ Total mistakes found: 4265
 ^^PM ^^me ^^if ^^I'm ^^wrong ^^or ^^if ^^you ^^have ^^any ^^suggestions.   
 ^^[Github](https://github.com/chiefpat450119)`;
 		const htmlResult = converter(text);
-		expect(htmlResult)
-			.toBe(`<blockquote><ul><li>loosing custom</li></ul></blockquote><pre><code></code></pre><p>Did you mean to say &quot;losing&quot;?<br>Explanation: Loose is an adjective meaning the opposite of tight, while lose is a verb.<br>Total mistakes found: 4265<br><sup>I&#x27;m</sup> <sup>a</sup> <sup>bot</sup> <sup>that</sup> <sup>corrects</sup> <sup>grammar/spelling</sup> <sup>mistakes.</sup>
+		expect(htmlResult).toBe(`<blockquote><ul><li>loosing custom</li></ul></blockquote><p>
+Did you mean to say &quot;losing&quot;?<br>Explanation: Loose is an adjective meaning the opposite of tight, while lose is a verb.<br>Total mistakes found: 4265<br><sup>I&#x27;m</sup> <sup>a</sup> <sup>bot</sup> <sup>that</sup> <sup>corrects</sup> <sup>grammar/spelling</sup> <sup>mistakes.</sup>
 <sup>PM</sup> <sup>me</sup> <sup>if</sup> <sup>I&#x27;m</sup> <sup>wrong</sup> <sup>or</sup> <sup>if</sup> <sup>you</sup> <sup>have</sup> <sup>any</sup> <sup>suggestions.</sup><br><sup><a href="https://github.com/chiefpat450119">Github</a></sup></p>`);
 	});
 
