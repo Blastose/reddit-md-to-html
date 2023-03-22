@@ -8,7 +8,7 @@ export const redditlink: SimpleMarkdownRule = {
 			return null;
 		}
 		if (prevCapture.length !== 0 && prevCapture[prevCapture.length - 1] !== ' ') return null;
-		return source.match(/^\/r\/\w{2,24}|^r\/\w{2,24}/);
+		return source.match(/^\/?r\/\w{2,24}/);
 	},
 	parse: function (capture) {
 		let target = '';

@@ -8,7 +8,7 @@ export const userlink: SimpleMarkdownRule = {
 			return null;
 		}
 		if (prevCapture.length !== 0 && prevCapture[prevCapture.length - 1] !== ' ') return null;
-		return source.match(/^\/u\/\w{2,}|^u\/\w{2,}/);
+		return source.match(/^\/?u\/\w{2,20}/);
 	},
 	parse: function (capture) {
 		let target = '';
