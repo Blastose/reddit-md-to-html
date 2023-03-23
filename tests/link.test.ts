@@ -118,4 +118,14 @@ describe('url', () => {
 			'<p>See <a href="https://www.reddit.com/r/bugs/comments/nwv50z/old_reddit_users_see_thousands_of_broken_links/">https://www.reddit.com/r/bugs/comments/nwv50z/old_reddit_users_see_thousands_of_broken_links/</a></p>'
 		);
 	});
+
+	test('url starting with www.', () => {
+		const htmlResult = converter('Visit www.google.ca for more info');
+		expect(htmlResult).toBe('<p>Visit <a href="www.google.ca">www.google.ca</a> for more info</p>');
+	});
+
+	test('does not match url not starting with www.', () => {
+		const htmlResult = converter('Visit old.reddit.com for more info');
+		expect(htmlResult).toBe('<p>Visit old.reddit.com for more info</p>');
+	});
 });
