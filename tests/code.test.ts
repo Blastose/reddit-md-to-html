@@ -35,7 +35,7 @@ https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior`;
 &#x27;January&#x27;
 &gt;&gt;&gt; datetime.strptime(&quot;02&quot;, &quot;%m&quot;).strftime(&quot;%B&quot;)
 &#x27;February&#x27;</code></pre><blockquote><blockquote><blockquote>
-</blockquote></blockquote></blockquote><p>The datetime module has a template language that converts from days/weeks/months, etc.</p><p><a href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior">https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior</a></p>`);
+</blockquote></blockquote></blockquote><p>The datetime module has a template language that converts from days/weeks/months, etc.</p><p><a href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior" rel="noopener nofollow ugc">https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior</a></p>`);
 	});
 
 	test('4 spaces codeblock with empty line in between', () => {

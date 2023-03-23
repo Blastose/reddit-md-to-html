@@ -19,7 +19,8 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 	html: function (node, output, state) {
 		const attributes = {
 			href: SimpleMarkdown.sanitizeUrl(node.target)?.replace(/\\/g, ''),
-			title: node.title
+			title: node.title,
+			rel: 'noopener nofollow ugc'
 		};
 
 		return SimpleMarkdown.htmlTag('a', output(node.content, state), attributes);

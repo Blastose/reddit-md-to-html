@@ -7,7 +7,7 @@ describe('link', () => {
 
 		const htmlResult = converter(text);
 		expect(htmlResult).toBe(
-			'<p><a href="https://www.google.com">ice creams</a> I love ice creams</p>'
+			'<p><a href="https://www.google.com" rel="noopener nofollow ugc">ice creams</a> I love ice creams</p>'
 		);
 	});
 
@@ -16,20 +16,22 @@ describe('link', () => {
 
 		const htmlResult = converter(text);
 		expect(htmlResult).toBe(
-			'<p><a href="https://www.google.com">https://www.google.com</a> is a website</p>'
+			'<p><a href="https://www.google.com" rel="noopener nofollow ugc">https://www.google.com</a> is a website</p>'
 		);
 	});
 
 	test('link wrapped with <>', () => {
 		const htmlResult = converter('<http://example.com/foo/../bar..>');
 		expect(htmlResult).toBe(
-			'<p><a href="http://example.com/foo/../bar..">http://example.com/foo/../bar..</a></p>'
+			'<p><a href="http://example.com/foo/../bar.." rel="noopener nofollow ugc">http://example.com/foo/../bar..</a></p>'
 		);
 	});
 
 	test('link with arbitrary text', () => {
 		const htmlResult = converter('[Rumi](https://en.wikipedia.org/wiki/Rumi)');
-		expect(htmlResult).toBe('<p><a href="https://en.wikipedia.org/wiki/Rumi">Rumi</a></p>');
+		expect(htmlResult).toBe(
+			'<p><a href="https://en.wikipedia.org/wiki/Rumi" rel="noopener nofollow ugc">Rumi</a></p>'
+		);
 	});
 
 	test('link with arbitrary text and title surrounded by quotes', () => {
@@ -37,7 +39,7 @@ describe('link', () => {
 			'[Zappa](https://en.wikipedia.org/wiki/Frank_Zappa "Frank Zappa - Wikipedia")'
 		);
 		expect(htmlResult).toBe(
-			'<p><a href="https://en.wikipedia.org/wiki/Frank_Zappa" title="Frank Zappa - Wikipedia">Zappa</a></p>'
+			'<p><a href="https://en.wikipedia.org/wiki/Frank_Zappa" title="Frank Zappa - Wikipedia" rel="noopener nofollow ugc">Zappa</a></p>'
 		);
 	});
 
@@ -46,7 +48,7 @@ describe('link', () => {
 			'[Zappa](https://en.wikipedia.org/wiki/Frank_Zappa "Frank Zappa - Wikipedia")'
 		);
 		expect(htmlResult).toBe(
-			'<p><a href="https://en.wikipedia.org/wiki/Frank_Zappa" title="Frank Zappa - Wikipedia">Zappa</a></p>'
+			'<p><a href="https://en.wikipedia.org/wiki/Frank_Zappa" title="Frank Zappa - Wikipedia" rel="noopener nofollow ugc">Zappa</a></p>'
 		);
 	});
 
@@ -55,7 +57,7 @@ describe('link', () => {
 			"[Gandhi](https://en.wikipedia.org/wiki/Mahatma_Gandhi 'Mahatma Gandhi - Wikipedia')"
 		);
 		expect(htmlResult).toBe(
-			'<p><a href="https://en.wikipedia.org/wiki/Mahatma_Gandhi" title="Mahatma Gandhi - Wikipedia">Gandhi</a></p>'
+			'<p><a href="https://en.wikipedia.org/wiki/Mahatma_Gandhi" title="Mahatma Gandhi - Wikipedia" rel="noopener nofollow ugc">Gandhi</a></p>'
 		);
 	});
 
@@ -69,7 +71,7 @@ https://preview.redd.it/gtec70b1uroa1.png?width=831&format=png&auto=webp&v=enabl
 
 		const htmlResult = converter(text);
 		expect(htmlResult).toBe(
-			`<p><strong>Panther</strong><br><strong>Github</strong>: <a href="https://github.com/AliRn76/panther">https://github.com/AliRn76/panther</a><br><strong>Documentation</strong>: <a href="https://pantherpy.github.io/">https://pantherpy.github.io/</a>  </p><p><a href="https://preview.redd.it/gtec70b1uroa1.png?width=831&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=08c1d9b71f3f555297432cc817dfa09d05c67c66">https://preview.redd.it/gtec70b1uroa1.png?width=831&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=08c1d9b71f3f555297432cc817dfa09d05c67c66</a></p>`
+			`<p><strong>Panther</strong><br><strong>Github</strong>: <a href="https://github.com/AliRn76/panther" rel="noopener nofollow ugc">https://github.com/AliRn76/panther</a><br><strong>Documentation</strong>: <a href="https://pantherpy.github.io/" rel="noopener nofollow ugc">https://pantherpy.github.io/</a>  </p><p><a href="https://preview.redd.it/gtec70b1uroa1.png?width=831&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=08c1d9b71f3f555297432cc817dfa09d05c67c66" rel="noopener nofollow ugc">https://preview.redd.it/gtec70b1uroa1.png?width=831&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=08c1d9b71f3f555297432cc817dfa09d05c67c66</a></p>`
 		);
 	});
 
@@ -82,8 +84,8 @@ it is all within yourself, in your [way of thinking][wot].
 [wot]: https://www.reddit.com/r/ChangeMyView/`;
 		const htmlResult = converter(text);
 		expect(htmlResult).toBe(
-			`<p><a href="https://www.reddit.com/r/Meditation/">Very little</a> is needed to make a happy life;
-it is all within yourself, in your <a href="https://www.reddit.com/r/ChangeMyView/">way of thinking</a>.</p>`
+			`<p><a href="https://www.reddit.com/r/Meditation/" rel="noopener nofollow ugc">Very little</a> is needed to make a happy life;
+it is all within yourself, in your <a href="https://www.reddit.com/r/ChangeMyView/" rel="noopener nofollow ugc">way of thinking</a>.</p>`
 		);
 	});
 });
@@ -92,21 +94,21 @@ describe('url', () => {
 	test('normal url', () => {
 		const htmlResult = converter(`https://www.twitter.com/simdf/1329853254`);
 		expect(htmlResult).toBe(
-			'<p><a href="https://www.twitter.com/simdf/1329853254">https://www.twitter.com/simdf/1329853254</a></p>'
+			'<p><a href="https://www.twitter.com/simdf/1329853254" rel="noopener nofollow ugc">https://www.twitter.com/simdf/1329853254</a></p>'
 		);
 	});
 
 	test('normal url with text surrounding', () => {
 		const htmlResult = converter(`Click this https://www.twitter.com/simdf/1329853254 to get`);
 		expect(htmlResult).toBe(
-			'<p>Click this <a href="https://www.twitter.com/simdf/1329853254">https://www.twitter.com/simdf/1329853254</a> to get</p>'
+			'<p>Click this <a href="https://www.twitter.com/simdf/1329853254" rel="noopener nofollow ugc">https://www.twitter.com/simdf/1329853254</a> to get</p>'
 		);
 	});
 
 	test('url with backslashes before underscores', () => {
 		const htmlResult = converter(String.raw`https://www.twitter.com/simdf\_sdjlkj/1329853254`);
 		expect(htmlResult).toBe(
-			'<p><a href="https://www.twitter.com/simdf_sdjlkj/1329853254">https://www.twitter.com/simdf_sdjlkj/1329853254</a></p>'
+			'<p><a href="https://www.twitter.com/simdf_sdjlkj/1329853254" rel="noopener nofollow ugc">https://www.twitter.com/simdf_sdjlkj/1329853254</a></p>'
 		);
 	});
 
@@ -115,13 +117,15 @@ describe('url', () => {
 			String.raw`See https://www.reddit.com/r/bugs/comments/nwv50z/old\_reddit\_users\_see\_thousands\_of\_broken\_links/`
 		);
 		expect(htmlResult).toBe(
-			'<p>See <a href="https://www.reddit.com/r/bugs/comments/nwv50z/old_reddit_users_see_thousands_of_broken_links/">https://www.reddit.com/r/bugs/comments/nwv50z/old_reddit_users_see_thousands_of_broken_links/</a></p>'
+			'<p>See <a href="https://www.reddit.com/r/bugs/comments/nwv50z/old_reddit_users_see_thousands_of_broken_links/" rel="noopener nofollow ugc">https://www.reddit.com/r/bugs/comments/nwv50z/old_reddit_users_see_thousands_of_broken_links/</a></p>'
 		);
 	});
 
 	test('url starting with www.', () => {
 		const htmlResult = converter('Visit www.google.ca for more info');
-		expect(htmlResult).toBe('<p>Visit <a href="www.google.ca">www.google.ca</a> for more info</p>');
+		expect(htmlResult).toBe(
+			'<p>Visit <a href="www.google.ca" rel="noopener nofollow ugc">www.google.ca</a> for more info</p>'
+		);
 	});
 
 	test('does not match url not starting with www.', () => {

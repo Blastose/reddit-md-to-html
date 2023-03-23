@@ -19,7 +19,7 @@ describe('superscript', () => {
 			'reddit ^and [^be ^reddited](https://www.redditgifts.com) ^in ^return.'
 		);
 		expect(htmlResult).toBe(
-			'<p>reddit <sup>and</sup> <a href="https://www.redditgifts.com"><sup>be</sup> <sup>reddited</sup></a> <sup>in</sup> <sup>return.</sup></p>'
+			'<p>reddit <sup>and</sup> <a href="https://www.redditgifts.com" rel="noopener nofollow ugc"><sup>be</sup> <sup>reddited</sup></a> <sup>in</sup> <sup>return.</sup></p>'
 		);
 	});
 
