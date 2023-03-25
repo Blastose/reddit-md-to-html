@@ -15,6 +15,12 @@ describe('codeBlock', () => {
 		);
 	});
 
+	test('1 line 4 spaces codeblock with link', () => {
+		const text = `    [LN Title](/s "LN Spoiler")`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(`<pre><code>[LN Title](/s &quot;LN Spoiler&quot;)</code></pre>`);
+	});
+
 	test('4 spaces codeblock and >>>', () => {
 		const text = `There are conversion functions in the datetime module.
 
