@@ -5,7 +5,11 @@ import { SimpleMarkdownRule } from './ruleType.js';
 // and ignore normal md images
 export const image: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.image, {
 	parse: function (capture, _parse, state) {
-		if (!state.options?.media_metadata || !state.options?.media_metadata[capture[2]]) {
+		if (
+			!state.options?.media_metadata ||
+			!state.options?.media_metadata[capture[2]] ||
+			state.options.media_metadata[capture[2]].e !== 'Image'
+		) {
 			return {
 				rawText: capture[0]
 			};
