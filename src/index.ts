@@ -17,7 +17,25 @@ import { hr } from './rules/hr.js';
 import { table } from './rules/table.js';
 import { fence } from './rules/fence.js';
 import { codeBlock } from './rules/codeBlock.js';
+import { image } from './rules/image.js';
 import SimpleMarkdown from 'simple-markdown';
+
+export interface Options {
+	media_metadata?: {
+		[media_id: string]: {
+			status: string;
+			e: string | 'Image';
+			m: string | 'image/png';
+			s: {
+				y: number;
+				x: number;
+				u: string;
+			};
+			t?: string | 'sticker';
+			id: string;
+		};
+	};
+}
 
 const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	spoiler,
@@ -38,17 +56,18 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	hr,
 	table,
 	fence,
-	codeBlock
+	codeBlock,
+	image
 });
 
 const parser = SimpleMarkdown.parserFor(rules);
-export const parse = function (source: string) {
+export const parse = function (source: string, options?: Options) {
 	const blockSource = source + '\n\n';
-	return parser(blockSource, { inline: false });
+	return parser(blockSource, { inline: false, options });
 };
 
 export const htmlOutput: SimpleMarkdown.Output<string> = SimpleMarkdown.outputFor(rules, 'html');
 
-export const converter = (text: string) => {
-	return htmlOutput(parser(text));
+export const converter = (text: string, options?: Options) => {
+	return htmlOutput(parser(text, { options }));
 };
