@@ -18,6 +18,7 @@ import { table } from './rules/table.js';
 import { fence } from './rules/fence.js';
 import { codeBlock } from './rules/codeBlock.js';
 import { image } from './rules/image.js';
+import { reflink } from './rules/reflink.js';
 import SimpleMarkdown from 'simple-markdown';
 
 export interface Options {
@@ -57,7 +58,8 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	table,
 	fence,
 	codeBlock,
-	image
+	image,
+	reflink
 });
 
 const parser = SimpleMarkdown.parserFor(rules);
