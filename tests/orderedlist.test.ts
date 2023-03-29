@@ -37,17 +37,17 @@ describe('orderedlist', () => {
 	});
 });
 
-// nested orderedlists do not work currently
-describe.skip('nested orderedlists', () => {
+describe('nested orderedlists', () => {
 	test('normal orderedlist', () => {
 		const text = `1. this
 2. is
-   1. a
-   2. great list
+  1. a
+  2. great list
 `;
 		const htmlResult = converter(text);
 		expect(htmlResult).toBe(
-			'<ol start="1"><li>this</li><li>is</li><li>a great</li><li>list</li><li>with</li><li>text</li></ol>'
+			`<ol start="1"><li>this</li><li>is
+<ol start="1"><li>a</li><li>great list</li></ol></li></ol>`
 		);
 	});
 });
