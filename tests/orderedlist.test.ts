@@ -35,6 +35,20 @@ describe('orderedlist', () => {
 			`<p>123. This should not turn into a ordered list</p><ol start="1"><li>This is a ol</li><li>this is also a ol</li></ol>`
 		);
 	});
+
+	test('list item separated by new line', () => {
+		const text = `Kotlin will always be compared to Java because 
+
+1. It was literally created to be a “better” Java. That’s also why JetBrains put so much effort in to supporting Java interoperability and compatibility with the same IDEs and tooling used by Java developers. 
+
+2. Kotlin’s power comes from java. Kotlin would be dead in the water if it wasn’t able to be compatible with the JVM and familiar enough where java developers could quickly onboard to Kotlin. Running on the same infrastructure as existing Java applications and being close enough to Java that existing developers can quickly onboard is what makes Kotlin an actually viable alternative to Java for companies.`;
+
+		const htmlResult = converter(text);
+
+		expect(htmlResult).toBe(
+			'<p>Kotlin will always be compared to Java because </p><ol start="1"><li><p>It was literally created to be a “better” Java. That’s also why JetBrains put so much effort in to supporting Java interoperability and compatibility with the same IDEs and tooling used by Java developers.</p></li><li><p>Kotlin’s power comes from java. Kotlin would be dead in the water if it wasn’t able to be compatible with the JVM and familiar enough where java developers could quickly onboard to Kotlin. Running on the same infrastructure as existing Java applications and being close enough to Java that existing developers can quickly onboard is what makes Kotlin an actually viable alternative to Java for companies.</p></li></ol>'
+		);
+	});
 });
 
 describe('nested orderedlists', () => {
