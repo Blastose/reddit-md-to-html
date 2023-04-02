@@ -4,16 +4,7 @@ import { SimpleMarkdownRule } from './ruleType.js';
 // Match function and regex from https://github.com/ariabuckles/simple-markdown/blob/7fb8bb5943ee4e561fec17c2e271a327f4e86d64/src/index.js#L688
 // Modifies LIST_R regex to only match list items starting with `1.` and not `[#].`
 const LIST_BULLET = '(?:[*+-]|\\d+\\.)';
-const LIST_R = new RegExp(
-	'^( *)(' +
-		'(?:[*+-]|1\\.)' +
-		') ' +
-		'[\\s\\S]+?(?:\n{2,}(?! )' +
-		'(?!\\1' +
-		'(?:[*+-]|\\d+\\.)' +
-		' )\\n*' +
-		'|\\s*\n*$)'
-);
+const LIST_R = /^( *)((?:[*+-]|1\.)) (?:(?!\n\n(?!\d+\. |\n| |\*|\+|-))[\s\S])*\n*/;
 const LIST_ITEM_PREFIX = '( *)(' + LIST_BULLET + ') +';
 const BLOCK_END_R = /\n{2,}$/;
 const LIST_BLOCK_END_R = BLOCK_END_R;
@@ -34,7 +25,7 @@ export const list: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 
 		if (isStartOfLineCapture && isListBlock) {
 			source = isStartOfLineCapture[1] + source;
-			return /^( *)((?:[*+-]|1\.)) (?:(?!\n\n[^*\n 0-9])(?!def)[\s\S])*\s*/.exec(source);
+			return LIST_R.exec(source);
 		} else {
 			return null;
 		}
