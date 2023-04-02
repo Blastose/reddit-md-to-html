@@ -124,7 +124,7 @@ describe('url', () => {
 	test('url starting with www.', () => {
 		const htmlResult = converter('Visit www.google.ca for more info');
 		expect(htmlResult).toBe(
-			'<p>Visit <a href="www.google.ca" rel="noopener nofollow ugc">www.google.ca</a> for more info</p>'
+			'<p>Visit <a href="https://www.google.ca" rel="noopener nofollow ugc">www.google.ca</a> for more info</p>'
 		);
 	});
 
