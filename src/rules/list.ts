@@ -34,7 +34,7 @@ export const list: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 
 		if (isStartOfLineCapture && isListBlock) {
 			source = isStartOfLineCapture[1] + source;
-			return LIST_R.exec(source);
+			return /^( *)((?:[*+-]|1\.)) (?:(?!\n\n[^*\n 0-9])(?!def)[\s\S])*\s*/.exec(source);
 		} else {
 			return null;
 		}
