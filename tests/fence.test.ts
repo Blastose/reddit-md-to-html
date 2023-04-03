@@ -43,7 +43,7 @@ birthMonth = 1
 print(months[birthMonth-1]) # prints January</code></pre><p>The <code>-1</code> is because lists are 0-indexed. The first entry is on index 0, the second on index 1, and so on.</p>`);
 	});
 
-	test('triple backtick codeblock TODO', () => {
+	test('triple backtick codeblock', () => {
 		const text = `and then you could just use  
  \`\`\`
 const person = new Person({lastName: "Doe", firstName: "John"})
