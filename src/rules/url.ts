@@ -11,5 +11,19 @@ export const url: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultR
 			return null;
 		}
 		return SimpleMarkdown.inlineRegex(urlRegex)(source, state, prevCapture);
-	} satisfies SimpleMarkdown.MatchFunction
+	} satisfies SimpleMarkdown.MatchFunction,
+	parse: function (capture, _parse, state) {
+		return {
+			addTargetBlank: state.options?.addTargetBlank,
+			type: 'link',
+			content: [
+				{
+					type: 'text',
+					content: capture[1]
+				}
+			],
+			target: capture[1],
+			title: undefined
+		};
+	} satisfies SimpleMarkdown.ParseFunction
 });

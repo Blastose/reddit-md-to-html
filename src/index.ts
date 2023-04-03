@@ -22,6 +22,7 @@ import { reflink } from './rules/reflink.js';
 import SimpleMarkdown from 'simple-markdown';
 
 export interface Options {
+	addTargetBlank?: boolean;
 	media_metadata?: {
 		[media_id: string]: {
 			status: string;

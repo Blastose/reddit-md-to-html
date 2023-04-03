@@ -10,6 +10,7 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 	parse: function (capture, parse, state) {
 		state.link = true;
 		const link = {
+			addTargetBlank: state.options?.addTargetBlank,
 			content: parse(capture[1], state),
 			target: SimpleMarkdown.unescapeUrl(capture[2]),
 			title: capture[3]
@@ -23,7 +24,8 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 				?.replace(/\\/g, '')
 				.replace(/^www\./, 'https://www.'),
 			title: node.title,
-			rel: 'noopener nofollow ugc'
+			rel: 'noopener nofollow ugc',
+			target: node.addTargetBlank ? '_blank' : null
 		};
 
 		return SimpleMarkdown.htmlTag('a', output(node.content, state), attributes);
