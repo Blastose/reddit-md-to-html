@@ -10,7 +10,20 @@ export const autolink: SimpleMarkdownRule = Object.assign(
 			if (state.link) {
 				return null;
 			}
-			return SimpleMarkdown.defaultRules.autolink.match(source, state, prevCapture);
-		} satisfies SimpleMarkdown.MatchFunction
+			return SimpleMarkdown.inlineRegex(/^<(https?:\/[^ >]+)>/)(source, state, prevCapture);
+		} satisfies SimpleMarkdown.MatchFunction,
+		parse: function (capture, _parse, state) {
+			return {
+				addTargetBlank: state.options?.addTargetBlank,
+				type: 'link',
+				content: [
+					{
+						type: 'text',
+						content: capture[1]
+					}
+				],
+				target: capture[1]
+			};
+		} satisfies SimpleMarkdown.ParseFunction
 	}
 );
