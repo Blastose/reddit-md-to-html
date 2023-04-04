@@ -10,7 +10,7 @@ import { urlRegex } from './url.js';
 // Modifies match function to not capture www.
 export const text: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.text, {
 	match: SimpleMarkdown.anyScopeRegex(
-		/^[\s\S]+?(?=[^0-9A-Za-z\s\u00c0-\uffff]|\n\n| {2,}\n|\w+:\S|r\/|\d+\.|www\.|$)/
+		/^[\s\S]+?(?=[^0-9A-Za-z\s\u00c0-\uffff]|\n\n| {2,}\n|\w+:\S|r\/|u\/|\d+\.|www\.|$)/
 	) satisfies SimpleMarkdown.MatchFunction,
 	html: function (node) {
 		if (node.content.match(urlRegex)) {

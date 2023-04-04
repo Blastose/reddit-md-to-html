@@ -85,4 +85,11 @@ describe('userlink', () => {
 			'<ul><li><strong><a href="/u/jimmy" rel="noopener nofollow ugc">/u/jimmy</a></strong></li></ul>'
 		);
 	});
+
+	test('two userlinks with space between', () => {
+		const htmlResult = converter('u/BlazeOfCinder u/MajicPotatoRA');
+		expect(htmlResult).toBe(
+			'<p><a href="/u/BlazeOfCinder" rel="noopener nofollow ugc">u/BlazeOfCinder</a> <a href="/u/MajicPotatoRA" rel="noopener nofollow ugc">u/MajicPotatoRA</a></p>'
+		);
+	});
 });
