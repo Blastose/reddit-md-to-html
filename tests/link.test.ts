@@ -121,6 +121,13 @@ describe('url', () => {
 		);
 	});
 
+	test('url with www. link only', () => {
+		const htmlResult = converter('www.google.ca');
+		expect(htmlResult).toBe(
+			'<p><a href="https://www.google.ca" rel="noopener nofollow ugc">www.google.ca</a></p>'
+		);
+	});
+
 	test('url starting with www.', () => {
 		const htmlResult = converter('Visit www.google.ca for more info');
 		expect(htmlResult).toBe(
