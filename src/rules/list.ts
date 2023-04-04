@@ -23,6 +23,20 @@ export const list: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 		const isStartOfLineCapture = LIST_LOOKBEHIND_R.exec(prevCaptureStr);
 		const isListBlock = state._list || !state.inline;
 
+		// The part is to skip matching another list marker when inside a list already
+		// An issue arises when there is another inline match right before a list marker (e.g. `- **a** - list marker`)
+		// The `**a**` will get matched as strong, but the space character in front of the `-` will end up
+		// getting matched as text, and then the `- list marker` will get matched as another list item,
+		// since prevCaptureStr will now be a ` `.
+		// To prevent this, we simply check if the start of the source is a space and the previous capture was not empty, and set a flag if it so
+		if (state.skipNextList) {
+			state.skipNextList = false;
+			return null;
+		}
+		if (source[0] === ' ' && !isStartOfLineCapture) {
+			state.skipNextList = true;
+		}
+
 		if (isStartOfLineCapture && isListBlock) {
 			source = isStartOfLineCapture[1] + source;
 			return LIST_R.exec(source);
