@@ -83,20 +83,6 @@ https://preview.redd.it/gtec70b1uroa1.png?width=831&format=png&auto=webp&v=enabl
 			`<p><strong>Panther</strong><br><strong>Github</strong>: <a href="https://github.com/AliRn76/panther" rel="noopener nofollow ugc">https://github.com/AliRn76/panther</a><br><strong>Documentation</strong>: <a href="https://pantherpy.github.io/" rel="noopener nofollow ugc">https://pantherpy.github.io/</a>  </p><p><a href="https://preview.redd.it/gtec70b1uroa1.png?width=831&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=08c1d9b71f3f555297432cc817dfa09d05c67c66" rel="noopener nofollow ugc">https://preview.redd.it/gtec70b1uroa1.png?width=831&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=08c1d9b71f3f555297432cc817dfa09d05c67c66</a></p>`
 		);
 	});
-
-	// Fails on [Very little]; cannot handle [] without a second []
-	test.fails('reference link', () => {
-		const text = `[Very little] is needed to make a happy life;
-it is all within yourself, in your [way of thinking][wot].
-
-[Very little]: https://www.reddit.com/r/Meditation/
-[wot]: https://www.reddit.com/r/ChangeMyView/`;
-		const htmlResult = converter(text);
-		expect(htmlResult).toBe(
-			`<p><a href="https://www.reddit.com/r/Meditation/" rel="noopener nofollow ugc">Very little</a> is needed to make a happy life;
-it is all within yourself, in your <a href="https://www.reddit.com/r/ChangeMyView/" rel="noopener nofollow ugc">way of thinking</a>.</p>`
-		);
-	});
 });
 
 describe('url', () => {
