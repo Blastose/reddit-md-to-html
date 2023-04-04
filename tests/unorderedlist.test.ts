@@ -14,6 +14,15 @@ describe('unorderedlist', () => {
 			'<ul><li>this</li><li>is</li><li>a great</li><li>list</li><li>with</li><li>text</li></ul>'
 		);
 	});
+
+	test('unorderedlist with another list marker inside a list item and bold', () => {
+		const text = `- **this is a list with a ** - dash in it
+- **some more text** * yeah more text`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<ul><li><strong>this is a list with a </strong> - dash in it</li><li><strong>some more text</strong> * yeah more text</li></ul>'
+		);
+	});
 });
 
 describe('nested unorderedlists', () => {
