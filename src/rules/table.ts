@@ -25,8 +25,8 @@ const TABLES = (function () {
 
 	const parseTableAlign = function (
 		source: string,
-		parse: SimpleMarkdown.Parser,
-		state: SimpleMarkdown.State,
+		_parse: SimpleMarkdown.Parser,
+		_state: SimpleMarkdown.State,
 		trimEndSeparators: boolean
 	): Array<SimpleMarkdown.TableAlignment> {
 		if (trimEndSeparators) {
@@ -110,6 +110,7 @@ const TABLES = (function () {
 // Modifies original table rule to match loosely
 // The loose match does not require `|` to be at the start of a table row
 // Modifies html function to not output more columns than the number of header columns
+// Modifies html function to not output empty `tr`'s in `tbody`
 export const table: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.table, {
 	match: SimpleMarkdown.blockRegex(
 		/^ *(.+\|.*)\n *\|( *[-:]+[-| :]*)\n((?: *.*\|.*(?:\n|$))*)\n*/
@@ -145,7 +146,10 @@ export const table: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaul
 			.join('');
 
 		const thead = SimpleMarkdown.htmlTag('thead', SimpleMarkdown.htmlTag('tr', headers));
-		const tbody = SimpleMarkdown.htmlTag('tbody', rows);
+		let tbody = SimpleMarkdown.htmlTag('tbody', '');
+		if (!(node.cells.length === 1 && node.cells[0].length === 0)) {
+			tbody = SimpleMarkdown.htmlTag('tbody', rows);
+		}
 
 		return SimpleMarkdown.htmlTag('table', thead + tbody);
 	} satisfies SimpleMarkdownRule['html']
