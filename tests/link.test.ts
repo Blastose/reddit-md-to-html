@@ -61,6 +61,15 @@ describe('link', () => {
 		);
 	});
 
+	test('link with arbitrary text and title surrounded by parentheses', () => {
+		const htmlResult = converter(
+			'[Twain](https://en.wikipedia.org/wiki/Mark_Twain (Mark Twain - Wikipedia))'
+		);
+		expect(htmlResult).toBe(
+			'<p><a href="https://en.wikipedia.org/wiki/Mark_Twain" title="Mark Twain - Wikipedia" rel="noopener nofollow ugc">Twain</a></p>'
+		);
+	});
+
 	test('url by itself after other links', () => {
 		const text = `**Panther**  
 **Github**: [https://github.com/AliRn76/panther](https://github.com/AliRn76/panther)  
