@@ -12,7 +12,7 @@ export const paragraph: SimpleMarkdownRule = Object.assign(
 		// Also modified to stop before a list marker
 		// Also modified to match 0-unlimited characters in group 1
 		match: SimpleMarkdown.blockRegex(
-			/^(?: *)((?:[^\n]|\n(?! *\n)(?! *```)(?!\d+\. |\* |\+ |- ))*)(?:\n *)*\n/
+			/^(?: *)((?:[^\n]|\n(?! *\n)(?! *```)(?!\d+\. |\d+\) |\* |\+ |- ))*)(?:\n *)*\n/
 		) satisfies SimpleMarkdown.MatchFunction,
 		html: function (node, output, state) {
 			if (node.content.length === 0) return '';

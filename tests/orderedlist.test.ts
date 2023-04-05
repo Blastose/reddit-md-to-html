@@ -67,6 +67,20 @@ describe('orderedlist', () => {
 			'<p>Back from a break. Some questions</p><ol start="1"><li>With 31+27 pulls and guarantee, how close will I get to Nahida? Got returning player event giving me stuff and on act v of sumeru.</li><li>Other than Nahida, who else could use tje teapot?</li><li>C6 Noelle, c2 Yunjin, c0 Gorou, and c6 Thoma. What&#x27;s the minimum investment for gorou?</li><li>Which dendro reaction can and can&#x27;t crit?</li><li>What&#x27;s Thoma&#x27;s good team?</li><li>Where can c0 Candace fit?</li></ol>'
 		);
 	});
+
+	test('list with `)`', () => {
+		const text = `Back from a break. Some questions
+1) With 31+27 pulls and guarantee, how close will I get to Nahida? Got returning player event giving me stuff and on act v of sumeru.
+2) Other than Nahida, who else could use tje teapot?
+3) C6 Noelle, c2 Yunjin, c0 Gorou, and c6 Thoma. What's the minimum investment for gorou?
+4) Which dendro reaction can and can't crit?
+5) What's Thoma's good team?
+6) Where can c0 Candace fit?`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<p>Back from a break. Some questions</p><ol start="1"><li>With 31+27 pulls and guarantee, how close will I get to Nahida? Got returning player event giving me stuff and on act v of sumeru.</li><li>Other than Nahida, who else could use tje teapot?</li><li>C6 Noelle, c2 Yunjin, c0 Gorou, and c6 Thoma. What&#x27;s the minimum investment for gorou?</li><li>Which dendro reaction can and can&#x27;t crit?</li><li>What&#x27;s Thoma&#x27;s good team?</li><li>Where can c0 Candace fit?</li></ol>'
+		);
+	});
 });
 
 describe('nested orderedlists', () => {
