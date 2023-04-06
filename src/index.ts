@@ -2,6 +2,7 @@ import { spoiler } from './rules/spoiler.js';
 import { superscript } from './rules/superscript.js';
 import { paragraph } from './rules/paragraph.js';
 import { heading } from './rules/heading.js';
+import { lheading } from './rules/lheading.js';
 import { blockQuote } from './rules/blockQuote.js';
 import { brBackslash } from './rules/brBackslash.js';
 import { u } from './rules/u.js';
@@ -48,6 +49,7 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	specialCharacters,
 	paragraph,
 	heading,
+	lheading,
 	blockQuote,
 	u,
 	link,
