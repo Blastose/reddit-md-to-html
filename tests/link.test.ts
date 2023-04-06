@@ -135,3 +135,13 @@ describe('url', () => {
 		expect(htmlResult).toBe('<p>Visit old.reddit.com for more info</p>');
 	});
 });
+
+describe('url but []() are [link](text)', () => {
+	test('[link](text) gets converted to <a>link</a>', () => {
+		const text = `I found an old post that gives some [https://www.reddit.com/r/apolloapp/comments/m19oi0/apollo_app_taking_up_unreasonable_amount_of_space/?utm_source=share&utm_medium=ios_app&utm_name=ioscss&utm_content=1&utm_term=1](clues here.)`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<p>I found an old post that gives some <a href="https://www.reddit.com/r/apolloapp/comments/m19oi0/apollo_app_taking_up_unreasonable_amount_of_space/?utm_source=share&amp;utm_medium=ios_app&amp;utm_name=ioscss&amp;utm_content=1&amp;utm_term=1" rel="noopener nofollow ugc">https://www.reddit.com/r/apolloapp/comments/m19oi0/apollo_app_taking_up_unreasonable_amount_of_space/?utm_source=share&amp;utm_medium=ios_app&amp;utm_name=ioscss&amp;utm_content=1&amp;utm_term=1</a></p>'
+		);
+	});
+});

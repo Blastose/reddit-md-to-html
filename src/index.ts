@@ -9,7 +9,7 @@ import { u } from './rules/u.js';
 import { redditlink } from './rules/redditlink.js';
 import { nonOrderedList } from './rules/nonOrderedList.js';
 import { specialCharacters } from './rules/specialCharacters.js';
-import { link } from './rules/link.js';
+import { link, linkBackwards } from './rules/link.js';
 import { autolink } from './rules/autolink.js';
 import { url } from './rules/url.js';
 import { list } from './rules/list.js';
@@ -53,6 +53,7 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	blockQuote,
 	u,
 	link,
+	linkBackwards,
 	autolink,
 	url,
 	list,

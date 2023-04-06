@@ -39,3 +39,22 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 		return SimpleMarkdown.htmlTag('a', output(node.content, state), attributes);
 	} satisfies SimpleMarkdown.HtmlNodeOutput
 });
+
+// Rule for []() links but the link and text are swapped (e.g. [link](text))
+// The html output will just be the link by itself
+export const linkBackwards: SimpleMarkdownRule = {
+	order: SimpleMarkdown.defaultRules.link.order - 0.5,
+	match: SimpleMarkdown.inlineRegex(
+		/^\[(https?:\/\/\s*<?(?:(?:\([^)]*\)|[^\s\\]|\\.)*?)>?(?:\s+['"(]([\s\S]*?)['")])?\s*)\]\((?!https?:\/\/)(?:\[[^\]]*\]|[^[\]]|\](?=[^[]*\]))*\)/
+	),
+	parse: function (capture, _parse, state) {
+		return {
+			addTargetBlank: state.options?.addTargetBlank,
+			type: 'link',
+			content: [{ type: 'text', content: capture[1] }],
+			target: capture[1],
+			title: undefined
+		};
+	},
+	html: null
+};
