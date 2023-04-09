@@ -101,9 +101,7 @@ const TABLES = (function () {
 
 	return {
 		parseTable: parseTable(true),
-		parseNpTable: parseTable(false),
-		TABLE_REGEX: /^ *(\|.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/,
-		NPTABLE_REGEX: /^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/
+		TABLE_REGEX: /^ *(.+\|.*)\n *\|?( *[-:]+[-| :]*)\n((?: *.*\|.*(?:\n|$))*)\n*/
 	};
 })();
 
@@ -112,9 +110,7 @@ const TABLES = (function () {
 // Modifies html function to not output more columns than the number of header columns
 // Modifies html function to not output empty `tr`'s in `tbody`
 export const table: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.table, {
-	match: SimpleMarkdown.blockRegex(
-		/^ *(.+\|.*)\n *\|( *[-:]+[-| :]*)\n((?: *.*\|.*(?:\n|$))*)\n*/
-	) satisfies SimpleMarkdown.MatchFunction,
+	match: SimpleMarkdown.blockRegex(TABLES.TABLE_REGEX) satisfies SimpleMarkdown.MatchFunction,
 	parse: TABLES.parseTable satisfies SimpleMarkdown.ParseFunction,
 	html: function (node, output, state) {
 		const getStyle = function (colIndex: number): string {
@@ -129,6 +125,7 @@ export const table: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaul
 					style: getStyle(i),
 					scope: 'col'
 				});
+				``;
 			})
 			.join('');
 
@@ -153,4 +150,11 @@ export const table: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaul
 
 		return SimpleMarkdown.htmlTag('table', thead + tbody);
 	} satisfies SimpleMarkdownRule['html']
+});
+
+// Modifies original nptable rule to not match anything
+export const nptable: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.nptable, {
+	match: function () {
+		return null;
+	}
 });

@@ -122,4 +122,17 @@ This is how it looks: >!spoiler text goes here!<`;
 			'<table><thead><tr><th scope="col"><a href="https://www.reddit.com/r/RemindMeBot/comments/e1bko7/remindmebot_info_v21/" rel="noopener nofollow ugc"><sup>Info</sup></a></th><th scope="col"><a href="https://www.reddit.com/message/compose/?to=RemindMeBot&amp;subject=Reminder&amp;message=%5BLink%20or%20message%20inside%20square%20brackets%5D%0A%0ARemindMe%21%20Time%20period%20here" rel="noopener nofollow ugc"><sup>Custom</sup></a></th><th scope="col"><a href="https://www.reddit.com/message/compose/?to=RemindMeBot&amp;subject=List%20Of%20Reminders&amp;message=MyReminders%21" rel="noopener nofollow ugc"><sup>Your Reminders</sup></a></th><th scope="col"><a href="https://www.reddit.com/message/compose/?to=Watchful1&amp;subject=RemindMeBot%20Feedback" rel="noopener nofollow ugc"><sup>Feedback</sup></a></th></tr></thead><tbody></tbody></table>'
 		);
 	});
+
+	test('table with missing | in alignment section', () => {
+		const text = `|#|Match|PST|EST|CET|KST
+:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:
+|1|VIT vs MAD|9:00 AM|12:00 PM|18:00|01:00
+|2|AST vs FNC|12:00 PM|3:00 PM|21:00|04:00`;
+
+		const htmlResult = converter(text);
+
+		expect(htmlResult).toBe(
+			'<table><thead><tr><th style="text-align:center;" scope="col">#</th><th style="text-align:center;" scope="col">Match</th><th style="text-align:center;" scope="col">PST</th><th style="text-align:center;" scope="col">EST</th><th style="text-align:center;" scope="col">CET</th><th style="text-align:center;" scope="col">KST</th></tr></thead><tbody><tr><td style="text-align:center;">1</td><td style="text-align:center;">VIT vs MAD</td><td style="text-align:center;">9:00 AM</td><td style="text-align:center;">12:00 PM</td><td style="text-align:center;">18:00</td><td style="text-align:center;">01:00</td></tr><tr><td style="text-align:center;">2</td><td style="text-align:center;">AST vs FNC</td><td style="text-align:center;">12:00 PM</td><td style="text-align:center;">3:00 PM</td><td style="text-align:center;">21:00</td><td style="text-align:center;">04:00</td></tr></tbody></table>'
+		);
+	});
 });

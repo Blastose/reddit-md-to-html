@@ -15,7 +15,7 @@ import { url } from './rules/url.js';
 import { list } from './rules/list.js';
 import { text } from './rules/text.js';
 import { hr } from './rules/hr.js';
-import { table } from './rules/table.js';
+import { table, nptable } from './rules/table.js';
 import { fence } from './rules/fence.js';
 import { codeBlock } from './rules/codeBlock.js';
 import { image } from './rules/image.js';
@@ -60,6 +60,7 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	text,
 	hr,
 	table,
+	nptable,
 	fence,
 	codeBlock,
 	image,
