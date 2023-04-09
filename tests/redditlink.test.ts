@@ -61,6 +61,13 @@ EDIT: oh damn, I think OP blocked me. Sorry, OP, I didn't mean any offence. r/pr
 		const htmlResult = converter(text);
 		expect(htmlResult).toBe('<p>converter/function</p>');
 	});
+
+	test('stops when non-character/number in subreddit name', () => {
+		const htmlResult = converter('r/burnt-baco_n');
+		expect(htmlResult).toBe(
+			'<p><a href="/r/burnt" rel="noopener nofollow ugc">r/burnt</a>-baco_n</p>'
+		);
+	});
 });
 
 describe('userlink', () => {
@@ -106,6 +113,13 @@ u/repostsleuthbot`;
 
 		expect(htmlResult).toBe(
 			'<p>Time went by like in one long nap </p><p>Source </p><p><a href="https://www.google.ca" rel="noopener nofollow ugc">https://www.google.ca</a></p><p><a href="/u/repostsleuthbot" rel="noopener nofollow ugc">u/repostsleuthbot</a></p>'
+		);
+	});
+
+	test('userlink with hyphen and underscore in name', () => {
+		const htmlResult = converter('u/burnt-baco_n');
+		expect(htmlResult).toBe(
+			'<p><a href="/u/burnt-baco_n" rel="noopener nofollow ugc">u/burnt-baco_n</a></p>'
 		);
 	});
 });
