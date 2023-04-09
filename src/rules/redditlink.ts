@@ -8,8 +8,28 @@ export const redditlink: SimpleMarkdownRule = {
 		if (state.link) {
 			return null;
 		}
-		if (prevCapture.length !== 0 && prevCapture[prevCapture.length - 1] !== ' ') return null;
-		return source.match(/^\/?r\/\w{2,24}|^\/?u\/\w{2,20}/);
+
+		// This following if block is to prevent redditlink from matching when
+		// there the link is inside a word (e.g. the r/parser in conerter/parser).
+		// However, we do want to match a redditlink if the previous capture ended with a new line
+		// since it should be the start of a new line
+		// The reason we are using state.prevCapture is that prevCapture only contains
+		// what was previous, while state.prevCapture is an array containing the entire line,
+		// not only what was matched
+		if (
+			state.prevCapture &&
+			state.prevCapture.length > 0 &&
+			state.prevCapture[0][state.prevCapture[0].length - 1] !== '\n' &&
+			prevCapture.length !== 0 &&
+			prevCapture[prevCapture.length - 1] !== ' '
+		) {
+			return null;
+		}
+		return SimpleMarkdown.inlineRegex(/^\/?r\/\w{2,24}|^\/?u\/[A-Za-z0-9_-]{2,20}/)(
+			source,
+			state,
+			prevCapture
+		);
 	},
 	parse: function (capture) {
 		let target = '';
