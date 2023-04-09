@@ -134,6 +134,16 @@ describe('url', () => {
 		const htmlResult = converter('Visit old.reddit.com for more info');
 		expect(htmlResult).toBe('<p>Visit old.reddit.com for more info</p>');
 	});
+
+	test('url with spaces in (link) part', () => {
+		const htmlResult = converter(
+			'[ [False Negative](https://www.reddit.com/message/compose/?to=RepostSleuthBot&subject=False%20Negative&message={"post_id": "12f19cn", "meme_template": 6358}) ]'
+		);
+
+		expect(htmlResult).toBe(
+			'<p>[ <a href="https://www.reddit.com/message/compose/?to=RepostSleuthBot&amp;subject=False%20Negative&amp;message={&quot;post_id&quot;: &quot;12f19cn&quot;, &quot;meme_template&quot;: 6358}" rel="noopener nofollow ugc">False Negative</a> ]</p>'
+		);
+	});
 });
 
 describe('url but []() are [link](text)', () => {

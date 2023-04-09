@@ -3,8 +3,9 @@ import { SimpleMarkdownRule } from './ruleType.js';
 
 const LINK_INSIDE = '(?:\\[[^\\]]*\\]|[^\\[\\]]|\\](?=[^\\[]*\\]))*';
 // Modified from original to include `(` and `)` for link titles
+// Modified to match spaces
 const LINK_HREF_AND_TITLE =
-	'\\s*<?((?:\\([^)]*\\)|[^\\s\\\\]|\\\\.)*?)>?(?:\\s+[\'"(]([\\s\\S]*?)[\'")])?\\s*';
+	'\\s*<?((?:\\([^)]*\\)|[^\\\\]|\\\\.)*?)>?(?:\\s+[\'"(]([\\s\\S]*?)[\'")])?\\s*';
 
 // Modifies original link rule to add a state when parsing to tell other rules
 // that the text has already been ran through the link rule
