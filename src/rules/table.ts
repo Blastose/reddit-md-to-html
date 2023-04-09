@@ -125,7 +125,6 @@ export const table: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaul
 					style: getStyle(i),
 					scope: 'col'
 				});
-				``;
 			})
 			.join('');
 
