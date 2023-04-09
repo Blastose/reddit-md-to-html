@@ -92,4 +92,20 @@ describe('userlink', () => {
 			'<p><a href="/u/BlazeOfCinder" rel="noopener nofollow ugc">u/BlazeOfCinder</a> <a href="/u/MajicPotatoRA" rel="noopener nofollow ugc">u/MajicPotatoRA</a></p>'
 		);
 	});
+
+	test('userlink after a previous match with a new line after', () => {
+		const text = `Time went by like in one long nap 
+
+Source 
+
+https://www.google.ca
+
+u/repostsleuthbot`;
+
+		const htmlResult = converter(text);
+
+		expect(htmlResult).toBe(
+			'<p>Time went by like in one long nap </p><p>Source </p><p><a href="https://www.google.ca" rel="noopener nofollow ugc">https://www.google.ca</a></p><p><a href="/u/repostsleuthbot" rel="noopener nofollow ugc">u/repostsleuthbot</a></p>'
+		);
+	});
 });
