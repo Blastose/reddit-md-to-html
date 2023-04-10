@@ -4,7 +4,7 @@ import { SimpleMarkdownRule } from './ruleType.js';
 // Match function and regex from https://github.com/ariabuckles/simple-markdown/blob/7fb8bb5943ee4e561fec17c2e271a327f4e86d64/src/index.js#L688
 // Modifies LIST_R regex to only match list items starting with `1.` and not `[#].`
 const LIST_BULLET = '(?:[*+-]|\\d+\\.|\\d+\\))';
-const LIST_R = /^( *)((?:[*+-]|1\.|1\))) (?:(?!\n\n(?!\d+\. |\d+\) |\n| |\*|\+|-))[\s\S])*\n*/;
+const LIST_R = /^( *)((?:[*+-]|1\.|1\))) (?:(?!\n\n(?!\d+\. |\d+\) |\n| |\* |\+ |- ))[\s\S])*\n*/;
 const LIST_ITEM_PREFIX = '( *)(' + LIST_BULLET + ') +';
 const BLOCK_END_R = /\n{2,}$/;
 const LIST_BLOCK_END_R = BLOCK_END_R;

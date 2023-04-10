@@ -23,6 +23,20 @@ describe('unorderedlist', () => {
 			'<ul><li><strong>this is a list with a </strong> - dash in it</li><li><strong>some more text</strong> * yeah more text</li></ul>'
 		);
 	});
+
+	test('unorderedlist marker only matches when space after list marker', () => {
+		const text = `- Playoffs
+- Four teams
+- Double elimination best of 5
+
+---
+
+**Bracket**`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<ul><li>Playoffs</li><li>Four teams</li><li>Double elimination best of 5</li></ul><hr><p><strong>Bracket</strong></p>'
+		);
+	});
 });
 
 describe('nested unorderedlists', () => {
