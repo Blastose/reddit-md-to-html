@@ -18,33 +18,28 @@ import { hr } from './rules/hr.js';
 import { table, nptable } from './rules/table.js';
 import { fence } from './rules/fence.js';
 import { codeBlock } from './rules/codeBlock.js';
-import { image } from './rules/image.js';
+import { image, redditImage } from './rules/image.js';
 import { reflink } from './rules/reflink.js';
 import SimpleMarkdown from 'simple-markdown';
 
 export interface MediaMetadataImage {
-	status: 'valid';
 	e: 'Image';
 	m: 'image/png' | 'image/jpg';
-	p?: AlbumEntry[];
-	o?: AlbumEntry[];
 	s: AlbumEntry;
-	t: 'sticker';
+	t?: string;
 	id: string;
 }
 
 export interface MediaMetadataGif {
-	status: 'valid';
 	e: 'AnimatedImage';
 	m: 'image/gif';
-	p?: AlbumEntry[];
 	s: {
 		y: number;
 		gif: string;
 		mp4?: string;
 		x: number;
 	};
-	t: 'giphy' | 'sticker';
+	t?: string;
 	id: string;
 }
 
@@ -85,6 +80,7 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	fence,
 	codeBlock,
 	image,
+	redditImage,
 	reflink
 });
 

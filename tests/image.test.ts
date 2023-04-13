@@ -82,4 +82,169 @@ describe('image', () => {
 			'<p><img src="https://reddit-meta-production.s3.amazonaws.com/public/fortnitebr/emotes/snoomoji_emotes/free_emotes_pack/scream.gif" alt="img" width="60" height="60"></p>'
 		);
 	});
+
+	test('reddit image using ![]()', () => {
+		const media_metadata = {
+			'8zyvax9yjmta1': {
+				status: 'valid',
+				e: 'Image',
+				m: 'image/jpg',
+				o: [
+					{
+						y: 608,
+						x: 1080,
+						u: 'https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&blur=40&format=pjpg&auto=webp&v=enabled&s=a4aebef1d232f49a36dff0928e6eed4b8eb45f48'
+					}
+				],
+				p: [
+					{
+						y: 60,
+						x: 108,
+						u: 'https://preview.redd.it/8zyvax9yjmta1.jpg?width=108&crop=smart&auto=webp&v=enabled&s=17955572ef6009bd1f80033178ef25ebb3a30554'
+					},
+					{
+						y: 121,
+						x: 216,
+						u: 'https://preview.redd.it/8zyvax9yjmta1.jpg?width=216&crop=smart&auto=webp&v=enabled&s=2c285a0adb25947e16c97709d4f0adfc44ade9a4'
+					},
+					{
+						y: 180,
+						x: 320,
+						u: 'https://preview.redd.it/8zyvax9yjmta1.jpg?width=320&crop=smart&auto=webp&v=enabled&s=7fd84c82fb42b4c446dfeba823da2378ac5fe2c5'
+					},
+					{
+						y: 360,
+						x: 640,
+						u: 'https://preview.redd.it/8zyvax9yjmta1.jpg?width=640&crop=smart&auto=webp&v=enabled&s=27e01b52c0071d37564c76bbfd6dc866000cbc3d'
+					},
+					{
+						y: 540,
+						x: 960,
+						u: 'https://preview.redd.it/8zyvax9yjmta1.jpg?width=960&crop=smart&auto=webp&v=enabled&s=ae017eb0c1040cb08dddb00d5835f4a820bfc5a9'
+					},
+					{
+						y: 608,
+						x: 1080,
+						u: 'https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&crop=smart&auto=webp&v=enabled&s=1826db1b9e940f7988b53dfaaa83bed7e75c9c29'
+					}
+				],
+				s: {
+					y: 608,
+					x: 1080,
+					u: 'https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&format=pjpg&auto=webp&v=enabled&s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c'
+				},
+				id: '8zyvax9yjmta1'
+			} as const
+		};
+
+		const htmlResult = converter('![img](8zyvax9yjmta1)', {
+			media_metadata
+		});
+		expect(htmlResult).toBe(
+			'<div class="reddit-image-container"><a href="https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c" rel="noopener nofollow ugc" target="_blank"><img src="https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c" alt="img" width="1080" height="608" class="reddit-image"></a></div>'
+		);
+	});
+
+	test('reddit image with caption using ![]()', () => {
+		const media_metadata = {
+			ibm0aw9yjmta1: {
+				status: 'valid',
+				e: 'Image',
+				m: 'image/jpg',
+				s: {
+					y: 192,
+					x: 175,
+					u: 'https://preview.redd.it/ibm0aw9yjmta1.jpg?width=175&format=pjpg&auto=webp&v=enabled&s=e53cef5ba5cc5956de2f6a12dab88e844631f24a'
+				},
+				id: 'ibm0aw9yjmta1'
+			} as const
+		};
+
+		const htmlResult = converter(
+			`![img](ibm0aw9yjmta1 " "Mizuki, Ecological Fountains"
+"Perfect creatures near the evolutionary singularity, counselors and leaders of We Many, "firstborn of the young", seaborn",  ")`,
+			{
+				media_metadata
+			}
+		);
+
+		expect(htmlResult)
+			.toBe(`<div class="reddit-image-container"><a href="https://preview.redd.it/ibm0aw9yjmta1.jpg?width=175&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=e53cef5ba5cc5956de2f6a12dab88e844631f24a" rel="noopener nofollow ugc" target="_blank"><img src="https://preview.redd.it/ibm0aw9yjmta1.jpg?width=175&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=e53cef5ba5cc5956de2f6a12dab88e844631f24a" alt="img" title=" &quot;Mizuki, Ecological Fountains&quot;
+&quot;Perfect creatures near the evolutionary singularity, counselors and leaders of We Many, &quot;firstborn of the young&quot;, seaborn&quot;,  " width="175" height="192" class="reddit-image"></a></div><p class="image-caption"> "Mizuki, Ecological Fountains"
+"Perfect creatures near the evolutionary singularity, counselors and leaders of We Many, "firstborn of the young", seaborn",  </p>`);
+	});
+
+	// test('reddit gif', () => {
+	// 	const media_metadata = {
+	// 		ibm0aw9yjmta1: {
+	// 			status: 'valid',
+	// 			e: 'Image',
+	// 			m: 'image/jpg',
+	// 			s: {
+	// 				y: 192,
+	// 				x: 175,
+	// 				u: 'https://preview.redd.it/ibm0aw9yjmta1.jpg?width=175&format=pjpg&auto=webp&v=enabled&s=e53cef5ba5cc5956de2f6a12dab88e844631f24a'
+	// 			},
+	// 			id: 'ibm0aw9yjmta1'
+	// 		} as const
+	// 	};
+
+	// 	const htmlResult = converter('![img](ibm0aw9yjmta1)', {
+	// 		media_metadata
+	// 	});
+
+	// 	expect(htmlResult).toBe(
+	// 		'<p><img src="https://reddit-meta-production.s3.amazonaws.com/public/fortnitebr/emotes/snoomoji_emotes/free_emotes_pack/scream.gif" alt="img" width="60" height="60"></p>'
+	// 	);
+	// });
+
+	// test('reddit image', () => {
+	// 	const media_metadata = {
+	// 		a: {}
+	// 	} as unknown as MediaMetadata;
+
+	// 	const htmlResult = converter('![img](emote|free_emotes_pack|scream)', {
+	// 		media_metadata
+	// 	});
+
+	// 	expect(htmlResult).toBe(
+	// 		'<p><img src="https://reddit-meta-production.s3.amazonaws.com/public/fortnitebr/emotes/snoomoji_emotes/free_emotes_pack/scream.gif" alt="img" width="60" height="60"></p>'
+	// 	);
+	// });
 });
+export interface MediaMetadata {
+	[media_id: string]: MediaMetadataImage | MediaMetadataGif;
+}
+
+export interface MediaMetadataImage {
+	status: 'valid';
+	e: 'Image';
+	m: 'image/png' | 'image/jpg';
+	p?: AlbumEntry[];
+	o?: AlbumEntry[];
+	s: AlbumEntry;
+	t: 'sticker';
+	id: string;
+}
+
+export interface MediaMetadataGif {
+	status: 'valid';
+	e: 'AnimatedImage';
+	m: 'image/gif';
+	ext?: 'string';
+	p?: AlbumEntry[];
+	s: {
+		y: number;
+		gif: string;
+		mp4?: string;
+		x: number;
+	};
+	t: 'giphy' | 'sticker';
+	id: string;
+}
+
+export interface AlbumEntry {
+	y: number;
+	x: number;
+	u: string;
+}
