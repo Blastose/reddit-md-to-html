@@ -208,20 +208,52 @@ describe('image', () => {
 		);
 	});
 
-	// test('reddit image', () => {
-	// 	const media_metadata = {
-	// 		a: {}
-	// 	} as unknown as MediaMetadata;
+	test('reddit image with caption using []()', () => {
+		const media_metadata = {
+			'8zyvax9yjmta1': {
+				status: 'valid',
+				e: 'Image',
+				m: 'image/jpg',
+				s: {
+					y: 608,
+					x: 1080,
+					u: 'https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&format=pjpg&auto=webp&v=enabled&s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c'
+				},
+				id: '8zyvax9yjmta1'
+			} as const
+		};
+		const text = `[Mizuki, the chosen one](https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&format=pjpg&auto=webp&v=enabled&s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c)`;
+		const htmlResult = converter(text, { media_metadata: media_metadata });
 
-	// 	const htmlResult = converter('![img](emote|free_emotes_pack|scream)', {
-	// 		media_metadata
-	// 	});
+		expect(htmlResult).toBe(
+			`<div class="reddit-image-container"><a href="https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c" rel="noopener nofollow ugc" target="_blank"><img src="https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c" alt="img" title="Mizuki, the chosen one" width="1080" height="608" class="reddit-image"></a></div><p class="image-caption">Mizuki, the chosen one</p>`
+		);
+	});
 
-	// 	expect(htmlResult).toBe(
-	// 		'<p><img src="https://reddit-meta-production.s3.amazonaws.com/public/fortnitebr/emotes/snoomoji_emotes/free_emotes_pack/scream.gif" alt="img" width="60" height="60"></p>'
-	// 	);
-	// });
+	test('reddit image with using []() without media_metadata', () => {
+		const text = `[Mizuki, the chosen one](https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&format=pjpg&auto=webp&v=enabled&s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c)`;
+		const htmlResult = converter(text);
+
+		expect(htmlResult).toBe(
+			'<a href="https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c" rel="noopener nofollow ugc">Mizuki, the chosen one</a>'
+		);
+	});
 });
+
+// test('reddit image', () => {
+// 	const media_metadata = {
+// 		a: {}
+// 	} as unknown as MediaMetadata;
+
+// 	const htmlResult = converter('![img](emote|free_emotes_pack|scream)', {
+// 		media_metadata
+// 	});
+
+// 	expect(htmlResult).toBe(
+// 		'<p><img src="https://reddit-meta-production.s3.amazonaws.com/public/fortnitebr/emotes/snoomoji_emotes/free_emotes_pack/scream.gif" alt="img" width="60" height="60"></p>'
+// 	);
+// });
+
 export interface MediaMetadata {
 	[media_id: string]: MediaMetadataImage | MediaMetadataGif;
 }
