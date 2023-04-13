@@ -22,21 +22,42 @@ import { image } from './rules/image.js';
 import { reflink } from './rules/reflink.js';
 import SimpleMarkdown from 'simple-markdown';
 
+export interface MediaMetadataImage {
+	status: 'valid';
+	e: 'Image';
+	m: 'image/png' | 'image/jpg';
+	p?: AlbumEntry[];
+	o?: AlbumEntry[];
+	s: AlbumEntry;
+	t: 'sticker';
+	id: string;
+}
+
+export interface MediaMetadataGif {
+	status: 'valid';
+	e: 'AnimatedImage';
+	m: 'image/gif';
+	p?: AlbumEntry[];
+	s: {
+		y: number;
+		gif: string;
+		mp4?: string;
+		x: number;
+	};
+	t: 'giphy' | 'sticker';
+	id: string;
+}
+
+export interface AlbumEntry {
+	y: number;
+	x: number;
+	u: string;
+}
+
 export interface Options {
 	addTargetBlank?: boolean;
 	media_metadata?: {
-		[media_id: string]: {
-			status: string;
-			e: string | 'Image';
-			m: string | 'image/png';
-			s: {
-				y: number;
-				x: number;
-				u: string;
-			};
-			t?: string | 'sticker';
-			id: string;
-		};
+		[media_id: string]: MediaMetadataImage | MediaMetadataGif | undefined;
 	};
 }
 
