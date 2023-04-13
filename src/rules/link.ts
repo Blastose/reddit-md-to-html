@@ -38,7 +38,12 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 			target: node.addTargetBlank ? '_blank' : null
 		};
 
-		return SimpleMarkdown.htmlTag('a', output(node.content, state), attributes);
+		const anchorHtml = SimpleMarkdown.htmlTag('a', output(node.content, state), attributes);
+		if (node.useParagraphWrapper) {
+			return SimpleMarkdown.htmlTag('p', anchorHtml);
+		}
+
+		return anchorHtml;
 	} satisfies SimpleMarkdown.HtmlNodeOutput
 });
 

@@ -238,8 +238,41 @@ describe('image', () => {
 			'<a href="https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c" rel="noopener nofollow ugc">Mizuki, the chosen one</a>'
 		);
 	});
+
+	test('reddit image with preview.redd.it link', () => {
+		const media_metadata = {
+			'8zyvax9yjmta1': {
+				status: 'valid',
+				e: 'Image',
+				m: 'image/jpg',
+				s: {
+					y: 608,
+					x: 1080,
+					u: 'https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&format=pjpg&auto=webp&v=enabled&s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c'
+				},
+				id: '8zyvax9yjmta1'
+			} as const
+		};
+		const text = `https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&format=pjpg&auto=webp&v=enabled&s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c`;
+		const htmlResult = converter(text, { media_metadata: media_metadata });
+
+		expect(htmlResult).toBe(
+			`<div class="reddit-image-container"><a href="https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c" rel="noopener nofollow ugc" target="_blank"><img src="https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c" alt="img" width="1080" height="608" class="reddit-image"></a></div>`
+		);
+	});
+
+	test('reddit image with preview.redd.it link without media_metadata', () => {
+		const text = `https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&format=pjpg&auto=webp&v=enabled&s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			`<p><a href="https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c" rel="noopener nofollow ugc">https://preview.redd.it/8zyvax9yjmta1.jpg?width=1080&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=77d073a823d0cb6fdd2f685b61bb41f9edd2f15c</a></p>`
+		);
+	});
 });
 
+// The following code is just to make sure TS works with the media_metadata types
+// defined in Jsrwrap
+//
 // test('reddit image', () => {
 // 	const media_metadata = {
 // 		a: {}
@@ -253,40 +286,39 @@ describe('image', () => {
 // 		'<p><img src="https://reddit-meta-production.s3.amazonaws.com/public/fortnitebr/emotes/snoomoji_emotes/free_emotes_pack/scream.gif" alt="img" width="60" height="60"></p>'
 // 	);
 // });
+// export interface MediaMetadata {
+// 	[media_id: string]: MediaMetadataImage | MediaMetadataGif;
+// }
 
-export interface MediaMetadata {
-	[media_id: string]: MediaMetadataImage | MediaMetadataGif;
-}
+// export interface MediaMetadataImage {
+// 	status: 'valid';
+// 	e: 'Image';
+// 	m: 'image/png' | 'image/jpg';
+// 	p?: AlbumEntry[];
+// 	o?: AlbumEntry[];
+// 	s: AlbumEntry;
+// 	t: 'sticker';
+// 	id: string;
+// }
 
-export interface MediaMetadataImage {
-	status: 'valid';
-	e: 'Image';
-	m: 'image/png' | 'image/jpg';
-	p?: AlbumEntry[];
-	o?: AlbumEntry[];
-	s: AlbumEntry;
-	t: 'sticker';
-	id: string;
-}
+// export interface MediaMetadataGif {
+// 	status: 'valid';
+// 	e: 'AnimatedImage';
+// 	m: 'image/gif';
+// 	ext?: 'string';
+// 	p?: AlbumEntry[];
+// 	s: {
+// 		y: number;
+// 		gif: string;
+// 		mp4?: string;
+// 		x: number;
+// 	};
+// 	t: 'giphy' | 'sticker';
+// 	id: string;
+// }
 
-export interface MediaMetadataGif {
-	status: 'valid';
-	e: 'AnimatedImage';
-	m: 'image/gif';
-	ext?: 'string';
-	p?: AlbumEntry[];
-	s: {
-		y: number;
-		gif: string;
-		mp4?: string;
-		x: number;
-	};
-	t: 'giphy' | 'sticker';
-	id: string;
-}
-
-export interface AlbumEntry {
-	y: number;
-	x: number;
-	u: string;
-}
+// export interface AlbumEntry {
+// 	y: number;
+// 	x: number;
+// 	u: string;
+// }
