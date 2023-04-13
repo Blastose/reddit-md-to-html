@@ -174,29 +174,39 @@ describe('image', () => {
 "Perfect creatures near the evolutionary singularity, counselors and leaders of We Many, "firstborn of the young", seaborn",  </p>`);
 	});
 
-	// test('reddit gif', () => {
-	// 	const media_metadata = {
-	// 		ibm0aw9yjmta1: {
-	// 			status: 'valid',
-	// 			e: 'Image',
-	// 			m: 'image/jpg',
-	// 			s: {
-	// 				y: 192,
-	// 				x: 175,
-	// 				u: 'https://preview.redd.it/ibm0aw9yjmta1.jpg?width=175&format=pjpg&auto=webp&v=enabled&s=e53cef5ba5cc5956de2f6a12dab88e844631f24a'
-	// 			},
-	// 			id: 'ibm0aw9yjmta1'
-	// 		} as const
-	// 	};
+	test('reddit gif', () => {
+		const media_metadata = {
+			'giphy|mKAoR36m45G00': {
+				status: 'valid',
+				e: 'AnimatedImage',
+				m: 'image/gif',
+				ext: 'https://giphy.com/gifs/mKAoR36m45G00',
+				p: [
+					{
+						y: 105,
+						x: 140,
+						u: 'https://b.thumbs.redditmedia.com/60P8bYMQ_FshTb9qrPGXPv5jMeBGl7TBndt3H-SO6GU.jpg'
+					}
+				],
+				s: {
+					y: 200,
+					gif: 'https://external-preview.redd.it/sidRI_MI4dTLqGQFeBYYQSGYH_IX1ufIoAtXdBiKLQU.gif?width=266&height=200&v=enabled&s=fd908df9afcfbc039a90853327cf7bc4a6b17e94',
+					mp4: 'https://external-preview.redd.it/sidRI_MI4dTLqGQFeBYYQSGYH_IX1ufIoAtXdBiKLQU.gif?width=266&height=200&format=mp4&v=enabled&s=7e3d3fe2aabed8d40590bca13adae54d4a4523f7',
+					x: 266
+				},
+				t: 'giphy',
+				id: 'giphy|mKAoR36m45G00'
+			} as const
+		};
 
-	// 	const htmlResult = converter('![img](ibm0aw9yjmta1)', {
-	// 		media_metadata
-	// 	});
+		const htmlResult = converter('![gif](giphy|mKAoR36m45G00)', {
+			media_metadata
+		});
 
-	// 	expect(htmlResult).toBe(
-	// 		'<p><img src="https://reddit-meta-production.s3.amazonaws.com/public/fortnitebr/emotes/snoomoji_emotes/free_emotes_pack/scream.gif" alt="img" width="60" height="60"></p>'
-	// 	);
-	// });
+		expect(htmlResult).toBe(
+			'<div><a href="https://giphy.com/gifs/mKAoR36m45G00" rel="noopener nofollow ugc" target="_blank"><img src="https://external-preview.redd.it/sidRI_MI4dTLqGQFeBYYQSGYH_IX1ufIoAtXdBiKLQU.gif?width=266&amp;height=200&amp;v=enabled&amp;s=fd908df9afcfbc039a90853327cf7bc4a6b17e94" alt="gif" width="266" height="200" class="reddit-image"></a></div>'
+		);
+	});
 
 	// test('reddit image', () => {
 	// 	const media_metadata = {

@@ -33,6 +33,7 @@ export interface MediaMetadataImage {
 export interface MediaMetadataGif {
 	e: 'AnimatedImage';
 	m: 'image/gif';
+	ext?: string;
 	s: {
 		y: number;
 		gif: string;

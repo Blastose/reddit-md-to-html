@@ -105,8 +105,10 @@ export const redditImage: SimpleMarkdownRule = {
 			| MediaMetadataGif;
 		const source = metadata.s;
 		let sourceUrl = '';
+		let ext: string | undefined;
 		if (metadata.e === 'AnimatedImage') {
 			sourceUrl = metadata.s.gif;
+			ext = metadata.ext;
 		} else if (metadata.e === 'Image') {
 			sourceUrl = metadata.s.u;
 		} else {
@@ -119,7 +121,9 @@ export const redditImage: SimpleMarkdownRule = {
 			title: capture[3]?.replace(/\\"/g, '"'),
 			width: source.x,
 			height: source.y,
-			isEmoji: metadata.t === 'sticker'
+			isEmoji: metadata.t === 'sticker',
+			isGif: metadata.e === 'AnimatedImage',
+			ext: ext
 		};
 		return image;
 	},
@@ -152,7 +156,7 @@ export const redditImage: SimpleMarkdownRule = {
 			);
 
 			const anchorAttributes = {
-				href: SimpleMarkdown.sanitizeUrl(node.target),
+				href: node.ext ?? SimpleMarkdown.sanitizeUrl(node.target),
 				rel: 'noopener nofollow ugc',
 				target: '_blank'
 			};
@@ -160,7 +164,7 @@ export const redditImage: SimpleMarkdownRule = {
 			const anchorHtml = SimpleMarkdown.htmlTag('a', imageHtml, anchorAttributes);
 
 			const imageHtmlWrapper = SimpleMarkdown.htmlTag('div', anchorHtml, {
-				class: 'reddit-image-container'
+				class: node.isGif ? '' : 'reddit-image-container'
 			});
 			return `${imageHtmlWrapper}${captionHtml}`;
 		}
