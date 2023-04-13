@@ -25,7 +25,7 @@ export const redditlink: SimpleMarkdownRule = {
 		) {
 			return null;
 		}
-		return SimpleMarkdown.inlineRegex(/^\/?r\/\w{2,24}|^\/?u\/[A-Za-z0-9_-]{2,20}/)(
+		return SimpleMarkdown.inlineRegex(/^\/?r\/\w+|^\/?u\/[A-Za-z0-9_-]+/)(
 			source,
 			state,
 			prevCapture

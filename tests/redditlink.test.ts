@@ -16,18 +16,6 @@ describe('redditlink', () => {
 		);
 	});
 
-	test('redditlink with less than 2 characters in subreddit name does not output a', () => {
-		const htmlResult = converter('/r/a');
-		expect(htmlResult).toBe('<p>/r/a</p>');
-	});
-
-	test('redditlink with more than 24 characters in subredditname only outputs the first 24 characters', () => {
-		const htmlResult = converter('/r/aabbcceeffgghhyyuuiiooppa');
-		expect(htmlResult).toBe(
-			'<p><a href="/r/aabbcceeffgghhyyuuiioopp" rel="noopener nofollow ugc">/r/aabbcceeffgghhyyuuiioopp</a>a</p>'
-		);
-	});
-
 	test('bolded list redditlink', () => {
 		const htmlResult = converter('* **/r/OtonariNoTenshiSama**');
 		expect(htmlResult).toBe(
@@ -74,11 +62,6 @@ describe('userlink', () => {
 	test('userlink with /u/', () => {
 		const htmlResult = converter('/u/jimmy');
 		expect(htmlResult).toBe('<p><a href="/u/jimmy" rel="noopener nofollow ugc">/u/jimmy</a></p>');
-	});
-
-	test('userlink with less than 2 characters in username does not output a', () => {
-		const htmlResult = converter('/u/y');
-		expect(htmlResult).toBe('<p>/u/y</p>');
 	});
 
 	test('userlink with u/', () => {
