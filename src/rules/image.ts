@@ -101,7 +101,7 @@ export const redditImage: SimpleMarkdownRule = {
 		const image = {
 			alt: capture[1],
 			target: SimpleMarkdown.unescapeUrl(sourceUrl),
-			title: capture[3]?.replace(/\\"/g, '"'),
+			title: capture[3]?.replace(/\\/g, ''),
 			width: source.x,
 			height: source.y,
 			isEmoji: metadata.t === 'sticker',

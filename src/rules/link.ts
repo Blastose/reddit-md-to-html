@@ -82,7 +82,7 @@ export const redditImageLink: SimpleMarkdownRule = {
 				type: 'redditImage',
 				alt: 'img',
 				target: SimpleMarkdown.unescapeUrl(metadata.s.u),
-				title: capture[1],
+				title: capture[1]?.replace(/\\/g, ''),
 				width: metadata.s.x,
 				height: metadata.s.y
 			};
