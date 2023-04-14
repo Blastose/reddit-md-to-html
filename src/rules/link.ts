@@ -1,5 +1,6 @@
 import SimpleMarkdown from 'simple-markdown';
 import { SimpleMarkdownRule } from './ruleType.js';
+import { MediaMetadataImage } from '../index.js';
 
 const LINK_INSIDE = '(?:\\[[^\\]]*\\]|[^\\[\\]]|\\](?=[^\\[]*\\]))*';
 // Modified from original to include `(` and `)` for link titles
@@ -37,7 +38,12 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 			target: node.addTargetBlank ? '_blank' : null
 		};
 
-		return SimpleMarkdown.htmlTag('a', output(node.content, state), attributes);
+		const anchorHtml = SimpleMarkdown.htmlTag('a', output(node.content, state), attributes);
+		if (node.useParagraphWrapper) {
+			return SimpleMarkdown.htmlTag('p', anchorHtml);
+		}
+
+		return anchorHtml;
 	} satisfies SimpleMarkdown.HtmlNodeOutput
 });
 
@@ -56,6 +62,40 @@ export const linkBackwards: SimpleMarkdownRule = {
 			target: capture[1],
 			title: undefined
 		};
+	},
+	html: null
+};
+
+export const redditImageLink: SimpleMarkdownRule = {
+	order: SimpleMarkdown.defaultRules.heading.order - 0.5,
+	match: SimpleMarkdown.blockRegex(
+		new RegExp('^\\[(' + LINK_INSIDE + ')\\]\\((https:\\/\\/preview\\.redd\\.it\\/(.*)\\..*)\\)\n+')
+	),
+	parse: function (capture, parse, state) {
+		if (
+			state.options?.media_metadata &&
+			state.options?.media_metadata[capture[3]] &&
+			state.options.media_metadata[capture[3]].e === 'Image'
+		) {
+			const metadata = state.options.media_metadata[capture[3]] as MediaMetadataImage;
+			return {
+				type: 'redditImage',
+				alt: 'img',
+				target: SimpleMarkdown.unescapeUrl(metadata.s.u),
+				title: capture[1],
+				width: metadata.s.x,
+				height: metadata.s.y
+			};
+		}
+
+		// If we do not have the image in media_metadata, we just return a normal link
+		const link = {
+			type: 'link',
+			addTargetBlank: state.options?.addTargetBlank,
+			content: parse(capture[1], state),
+			target: SimpleMarkdown.unescapeUrl(capture[2])
+		};
+		return link;
 	},
 	html: null
 };
