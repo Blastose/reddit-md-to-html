@@ -7,6 +7,41 @@ describe('heading', () => {
 
 		expect(htmlResult).toBe('<h1>heading</h1>');
 	});
+
+	test('heading with <4 spaces in front', () => {
+		const htmlResult = converter('   #heading');
+
+		expect(htmlResult).toBe('<h1>heading</h1>');
+	});
+
+	test('heading does not convert when there are >3 spaces in front', () => {
+		const text = `For example:
+
+    #[derive(thiserror::Error, Debug)]
+    pub enum Error {
+        #[error(transparent)]
+        Contract(#[from] contract::Error),
+        #[error(transparent)]
+        Events(#[from] events::Error),
+        #[error(transparent)]
+        Lab(#[from] lab::Error),
+        #[error(transparent)]
+        Config(#[from] config::Error),
+    }`;
+
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(`<p>For example:</p><pre><code>#[derive(thiserror::Error, Debug)]
+pub enum Error {
+    #[error(transparent)]
+    Contract(#[from] contract::Error),
+    #[error(transparent)]
+    Events(#[from] events::Error),
+    #[error(transparent)]
+    Lab(#[from] lab::Error),
+    #[error(transparent)]
+    Config(#[from] config::Error),
+}</code></pre>`);
+	});
 });
 
 describe('lheading', () => {
