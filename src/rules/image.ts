@@ -2,18 +2,25 @@ import SimpleMarkdown from 'simple-markdown';
 import { SimpleMarkdownRule } from './ruleType.js';
 import { MediaMetadataImage, MediaMetadataGif } from '../index.js';
 
+function captureExistsInMediaMetadata(state: any, capture: any) {
+	if (
+		!state.options?.media_metadata ||
+		!state.options?.media_metadata[capture[2]] ||
+		(state.options.media_metadata[capture[2]].e !== 'Image' &&
+			state.options.media_metadata[capture[2]].e !== 'AnimatedImage')
+	) {
+		return false;
+	}
+	return true;
+}
+
 // Modifies original image rule to use images from media_metadata if present
 // and ignore normal md images
 // Used for reddit emojis and is inline
 // See redditImage for block images
 export const image: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.image, {
 	parse: function (capture, _parse, state) {
-		if (
-			!state.options?.media_metadata ||
-			!state.options?.media_metadata[capture[2]] ||
-			(state.options.media_metadata[capture[2]].e !== 'Image' &&
-				state.options.media_metadata[capture[2]].e !== 'AnimatedImage')
-		) {
+		if (!captureExistsInMediaMetadata(state, capture)) {
 			return {
 				rawText: capture[0]
 			};
@@ -58,13 +65,6 @@ export const image: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaul
 		return SimpleMarkdown.htmlTag('img', '', attributes, false);
 	} satisfies SimpleMarkdownRule['html']
 });
-// TODO Cleanup
-
-// TODO is this even needed?
-// maybe we can just use t === sticker to check if its an emoji or actual image
-// and output the html differently
-// Kinda needed since without it, a paragraph with match since its inline
-// TODO parse is same as above; make it a function or something
 
 // We cannot tell if the image is an emoji until we reach the parsing stage
 // If the image is an emoji, it should be inline and have a <p> tag wrapper
@@ -77,12 +77,7 @@ export const redditImage: SimpleMarkdownRule = {
 		)(source, state, prevCapture);
 	},
 	parse: function (capture, _parse, state) {
-		if (
-			!state.options?.media_metadata ||
-			!state.options?.media_metadata[capture[2]] ||
-			(state.options.media_metadata[capture[2]].e !== 'Image' &&
-				state.options.media_metadata[capture[2]].e !== 'AnimatedImage')
-		) {
+		if (!captureExistsInMediaMetadata(state, capture)) {
 			return {
 				rawText: capture[0].trimEnd()
 			};
@@ -157,7 +152,7 @@ export const redditImage: SimpleMarkdownRule = {
 			return `${imageHtmlWrapper}${captionHtml}`;
 		}
 
-		// If this
+		// If this block was an emoji, it needs to be wrapped in a p tag like inline image emojis
 		const emojiHtml = SimpleMarkdown.htmlTag('img', '', attributes, false);
 		return SimpleMarkdown.htmlTag('p', emojiHtml);
 	}
