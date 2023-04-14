@@ -1,6 +1,6 @@
 import SimpleMarkdown from 'simple-markdown';
 import { SimpleMarkdownRule } from './ruleType.js';
-import { MediaMetadataImage, MediaMetadataGif } from '../index.js';
+import { MediaMetadataImage, MediaMetadataGif } from '../options.js';
 
 function captureExistsInMediaMetadata(state: any, capture: any) {
 	if (

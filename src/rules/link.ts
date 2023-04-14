@@ -1,6 +1,6 @@
 import SimpleMarkdown from 'simple-markdown';
 import { SimpleMarkdownRule } from './ruleType.js';
-import { MediaMetadataImage } from '../index.js';
+import { MediaMetadataImage } from '../options.js';
 
 const LINK_INSIDE = '(?:\\[[^\\]]*\\]|[^\\[\\]]|\\](?=[^\\[]*\\]))*';
 // Modified from original to include `(` and `)` for link titles
