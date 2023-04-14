@@ -55,22 +55,10 @@ export const image: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaul
 			height: node.height
 		};
 
-		// if (!node.isEmoji) {
-		// 	let captionHtml = '';
-		// 	if (node.title) {
-		// 		const captionAttributes = {
-		// 			class: 'image-caption'
-		// 		};
-		// 		captionHtml = SimpleMarkdown.htmlTag('p', node.title, captionAttributes);
-		// 	}
-		// 	const imageHtml = SimpleMarkdown.htmlTag('img', '', attributes, false);
-		// 	const imageHtmlWrapper = SimpleMarkdown.htmlTag('div', imageHtml);
-		// 	return `${imageHtmlWrapper}${captionHtml}`;
-		// }
-
 		return SimpleMarkdown.htmlTag('img', '', attributes, false);
 	} satisfies SimpleMarkdownRule['html']
 });
+// TODO Cleanup
 
 // TODO is this even needed?
 // maybe we can just use t === sticker to check if its an emoji or actual image
@@ -85,7 +73,7 @@ export const redditImage: SimpleMarkdownRule = {
 	order: SimpleMarkdown.defaultRules.paragraph.order - 0.5,
 	match: function (source, state, prevCapture) {
 		return SimpleMarkdown.blockRegex(
-			/^!\[((?:\[[^\]]*\]|[^[\]]|\](?=[^[]*\]))*)\]\(\s*<?((?:\([^)]*\)|[^\s\\]|\\.)*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*\)\n+/
+			/^!\[((?:\[[^\]]*\]|[^[\]]|\](?=[^[]*\]))*)\]\(\s*<?((?:\([^)]*\)|[^\s\\)!]|\\.)*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*\)\n+/
 		)(source, state, prevCapture);
 	},
 	parse: function (capture, _parse, state) {

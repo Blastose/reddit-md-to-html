@@ -58,6 +58,32 @@ describe('image', () => {
 		);
 	});
 
+	test('reddit emoji many', () => {
+		const media_metadata = {
+			'emote|t5_3p20d|14001': {
+				status: 'valid',
+				e: 'Image',
+				m: 'image/png',
+				s: {
+					y: 20,
+					x: 20,
+					u: 'https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png'
+				},
+				t: 'sticker',
+				id: 'emote|t5_3p20d|14001'
+			} as const
+		};
+		const text =
+			'![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)![img](emote|t5_3p20d|14001)';
+		const htmlResult = converter(text, {
+			media_metadata
+		});
+
+		expect(htmlResult).toBe(
+			'<p><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/k8tRXVaBjn.png" alt="img" width="20" height="20"></p>'
+		);
+	});
+
 	test('reddit gif emoji', () => {
 		const media_metadata = {
 			'emote|free_emotes_pack|scream': {

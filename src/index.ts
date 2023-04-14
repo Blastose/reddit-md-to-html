@@ -96,5 +96,5 @@ export const parse = function (source: string, options?: Options) {
 export const htmlOutput: SimpleMarkdown.Output<string> = SimpleMarkdown.outputFor(rules, 'html');
 
 export const converter = (text: string, options?: Options) => {
-	return htmlOutput(parser(text, { options }));
+	return htmlOutput(parse(text, options));
 };
