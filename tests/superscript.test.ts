@@ -42,6 +42,14 @@ describe('superscript', () => {
 		);
 	});
 
+	test('superscript with url with space in [ ] part of []()', () => {
+		const text = `^[xkcd.com](http://www.xkcd.com) ^| ^[xkcd sub](http://www.reddit.com/r/xkcdcomic/)/[kerfuffle](http://www.reddit.com/r/self/comments/1xdwba/the_history_of_the_rxkcd_kerfuffle/) ^| ^[Problems/Bugs?](http://www.reddit.com/r/xkcd_transcriber/) ^| ^[Statistics](http://xkcdref.info/statistics/) ^| ^[Stop Replying](http://reddit.com/message/compose/?to=xkcd_transcriber&subject=ignore%20me&message=ignore%20me)`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			`<p><sup><a href="http://www.xkcd.com" rel="noopener nofollow ugc">xkcd.com</a></sup> <sup>|</sup> <sup><a href="http://www.reddit.com/r/xkcdcomic/" rel="noopener nofollow ugc">xkcd sub</a>/<a href="http://www.reddit.com/r/self/comments/1xdwba/the_history_of_the_rxkcd_kerfuffle/" rel="noopener nofollow ugc">kerfuffle</a></sup> <sup>|</sup> <sup><a href="http://www.reddit.com/r/xkcd_transcriber/" rel="noopener nofollow ugc">Problems/Bugs?</a></sup> <sup>|</sup> <sup><a href="http://xkcdref.info/statistics/" rel="noopener nofollow ugc">Statistics</a></sup> <sup>|</sup> <sup><a href="http://reddit.com/message/compose/?to=xkcd_transcriber&amp;subject=ignore%20me&amp;message=ignore%20me" rel="noopener nofollow ugc">Stop Replying</a></sup></p>`
+		);
+	});
+
 	// Inconsistent with both new and old reddit
 	test.fails('superscript with em', () => {
 		const htmlResult = converter('^(superscript-_+_++_+_++++___+_+__******#**!#@$#${}[])');

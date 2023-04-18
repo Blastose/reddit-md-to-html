@@ -13,11 +13,15 @@ export const superscript: SimpleMarkdownRule = {
 				prevCapture
 			);
 		}
-		return SimpleMarkdown.inlineRegex(/^\^+\(([^)]+)\)|^\^+([^\s^]+)/)(source, state, prevCapture);
+		return SimpleMarkdown.inlineRegex(/^\^+(\[[^\]]*\]\([^ ]*\))|^\^+\(([^)]+)\)|^\^+([^\s^]+)/)(
+			source,
+			state,
+			prevCapture
+		);
 	},
 	parse: function (capture, parse, state) {
 		return {
-			content: parse(capture[1] ?? capture[2], state)
+			content: parse(capture[1] ?? capture[2] ?? capture[3], state)
 		};
 	},
 	html: function (node, output, state) {
