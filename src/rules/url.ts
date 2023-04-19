@@ -14,17 +14,35 @@ export const url: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultR
 		return SimpleMarkdown.inlineRegex(urlRegex)(source, state, prevCapture);
 	} satisfies SimpleMarkdown.MatchFunction,
 	parse: function (capture, _parse, state) {
+		// Add backpedal logic from markedjs https://github.com/markedjs/marked/blob/7c1e114f9f7949ba4033366582d2a4ddf09e85af/lib/marked.cjs#L1058
+		// See https://github.github.com/gfm/#extended-autolink-path-validation
+		const backpedal = /(?:[^?!.,:;*_'"~()&]+|\([^)]*\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_'"~)]+(?!$))+/;
+
+		const initial = capture[0];
+		let backpedalCapture = initial;
+		let prevBackpedalCapture = backpedalCapture;
+		do {
+			const backpedalRegexResponse = backpedal.exec(backpedalCapture);
+			if (!backpedalRegexResponse) {
+				break;
+			}
+			prevBackpedalCapture = backpedalCapture;
+			backpedalCapture = backpedalRegexResponse[0];
+		} while (prevBackpedalCapture !== backpedalCapture);
+		const backpedalDiff = initial.replace(backpedalCapture, '');
+
 		return {
 			addTargetBlank: state.options?.addTargetBlank,
 			type: 'link',
 			content: [
 				{
 					type: 'text',
-					content: capture[1]
+					content: backpedalCapture
 				}
 			],
-			target: capture[1],
-			title: undefined
+			target: backpedalCapture,
+			title: undefined,
+			backpedalDiff
 		};
 	} satisfies SimpleMarkdown.ParseFunction
 });

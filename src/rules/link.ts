@@ -39,6 +39,9 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 		};
 
 		const anchorHtml = SimpleMarkdown.htmlTag('a', output(node.content, state), attributes);
+		if (node.backpedalDiff) {
+			return `${anchorHtml}${node.backpedalDiff}`;
+		}
 		if (node.useParagraphWrapper) {
 			return SimpleMarkdown.htmlTag('p', anchorHtml);
 		}

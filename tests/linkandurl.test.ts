@@ -144,6 +144,15 @@ describe('url', () => {
 			'<p>[ <a href="https://www.reddit.com/message/compose/?to=RepostSleuthBot&amp;subject=False%20Negative&amp;message={&quot;post_id&quot;: &quot;12f19cn&quot;, &quot;meme_template&quot;: 6358}" rel="noopener nofollow ugc">False Negative</a> ]</p>'
 		);
 	});
+
+	test('url with )? at end that does not get matched', () => {
+		const htmlResult = converter(
+			'https://reddit.com/r/redditdev/comments/s4b60c/how_can_i_get_a_video_url_from_the_reddit_api/)?'
+		);
+		expect(htmlResult).toBe(
+			'<p><a href="https://reddit.com/r/redditdev/comments/s4b60c/how_can_i_get_a_video_url_from_the_reddit_api/" rel="noopener nofollow ugc">https://reddit.com/r/redditdev/comments/s4b60c/how_can_i_get_a_video_url_from_the_reddit_api/</a>)?</p>'
+		);
+	});
 });
 
 describe('url but []() are [link](text)', () => {
