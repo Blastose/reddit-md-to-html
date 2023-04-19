@@ -3,7 +3,7 @@ import { SimpleMarkdownRule } from './ruleType.js';
 import { MediaMetadataImage } from '../options.js';
 
 // Modifies original url regex to include www.
-export const urlRegex = /^((?:https?:\/\/|www\.)[^\s<]+[^<.,:;"')\]\s])/;
+export const urlRegex = /^((?:https?):\/\/|www\.)(?:[a-zA-Z0-9-]+\.?)+[^\s<]*/;
 
 // Modifies original url rule to ignore urls already parsed by the link rule
 export const url: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.url, {

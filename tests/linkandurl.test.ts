@@ -153,6 +153,13 @@ describe('url', () => {
 			'<p><a href="https://reddit.com/r/redditdev/comments/s4b60c/how_can_i_get_a_video_url_from_the_reddit_api/" rel="noopener nofollow ugc">https://reddit.com/r/redditdev/comments/s4b60c/how_can_i_get_a_video_url_from_the_reddit_api/</a>)?</p>'
 		);
 	});
+
+	test('url with unmatched trailing parentheses', () => {
+		const htmlResult = converter('www.google.com/search?q=Markup+(business)))');
+		expect(htmlResult).toBe(
+			'<p><a href="https://www.google.com/search?q=Markup+(business)" rel="noopener nofollow ugc">www.google.com/search?q=Markup+(business)</a>))</p>'
+		);
+	});
 });
 
 describe('url but []() are [link](text)', () => {
