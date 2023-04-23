@@ -135,4 +135,24 @@ This is how it looks: >!spoiler text goes here!<`;
 			'<table><thead><tr><th style="text-align:center;" scope="col">#</th><th style="text-align:center;" scope="col">Match</th><th style="text-align:center;" scope="col">PST</th><th style="text-align:center;" scope="col">EST</th><th style="text-align:center;" scope="col">CET</th><th style="text-align:center;" scope="col">KST</th></tr></thead><tbody><tr><td style="text-align:center;">1</td><td style="text-align:center;">VIT vs MAD</td><td style="text-align:center;">9:00 AM</td><td style="text-align:center;">12:00 PM</td><td style="text-align:center;">18:00</td><td style="text-align:center;">01:00</td></tr><tr><td style="text-align:center;">2</td><td style="text-align:center;">AST vs FNC</td><td style="text-align:center;">12:00 PM</td><td style="text-align:center;">3:00 PM</td><td style="text-align:center;">21:00</td><td style="text-align:center;">04:00</td></tr></tbody></table>'
 		);
 	});
+
+	test('table with ending newline and space', () => {
+		const text = `####Tier 1
+ 
+| Team | Information | League |
+|:--:|:--:|:--|:--:|
+| GEN| [Leaguepedia](https://lol.fandom.com/wiki/Gen.G)| LCK |
+| JDG Intel Esports Club|[Leaguepedia](https://lol.fandom.com/wiki/JD_Gaming)| LPL |
+ 
+####Tier 2
+| Team | Information | League |
+|:--:|:--:|:--|:--:|
+| MAD Lions|[Leaguepedia](https://lol.fandom.com/wiki/MAD_Lions)| LEC |
+| Cloud9|[Leaguepedia](https://lol.fandom.com/wiki/Cloud9)| LCS |`;
+
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<h4>Tier 1</h4><table><thead><tr><th style="text-align:center;" scope="col">Team</th><th style="text-align:center;" scope="col">Information</th><th style="text-align:left;" scope="col">League</th></tr></thead><tbody><tr><td style="text-align:center;">GEN</td><td style="text-align:center;"><a href="https://lol.fandom.com/wiki/Gen.G" rel="noopener nofollow ugc">Leaguepedia</a></td><td style="text-align:left;">LCK</td></tr><tr><td style="text-align:center;">JDG Intel Esports Club</td><td style="text-align:center;"><a href="https://lol.fandom.com/wiki/JD_Gaming" rel="noopener nofollow ugc">Leaguepedia</a></td><td style="text-align:left;">LPL</td></tr></tbody></table><h4>Tier 2</h4><table><thead><tr><th style="text-align:center;" scope="col">Team</th><th style="text-align:center;" scope="col">Information</th><th style="text-align:left;" scope="col">League</th></tr></thead><tbody><tr><td style="text-align:center;">MAD Lions</td><td style="text-align:center;"><a href="https://lol.fandom.com/wiki/MAD_Lions" rel="noopener nofollow ugc">Leaguepedia</a></td><td style="text-align:left;">LEC</td></tr><tr><td style="text-align:center;">Cloud9</td><td style="text-align:center;"><a href="https://lol.fandom.com/wiki/Cloud9" rel="noopener nofollow ugc">Leaguepedia</a></td><td style="text-align:left;">LCS</td></tr></tbody></table>'
+		);
+	});
 });
