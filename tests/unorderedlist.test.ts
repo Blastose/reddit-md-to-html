@@ -37,6 +37,32 @@ describe('unorderedlist', () => {
 			'<ul><li>Playoffs</li><li>Four teams</li><li>Double elimination best of 5</li></ul><hr><p><strong>Bracket</strong></p>'
 		);
 	});
+
+	test('unorderedlist stops matching after two empty new lines (with whitespace)', () => {
+		const text = `* Playin Stage
+ 
+ * 8 teams participate
+ * Teams are drawn into two double elimination brackets
+ * Bracket matches are best of three
+ * LCQ match is best of five
+ * Winners of each group and the winner of the LCQ match between the lower bracket winners advance to Stage 2
+
+* Bracket Stage
+ * 8 teams participate
+ * Double elimination bracket
+ * All matches are Best of 5
+ * Teams are drawn into the bracket with teams from tier 1 and 2 playing teams from tier 3.
+ * Teams from tier 1 are placed on the opposite side of the bracket.
+ * Teams from the same region can't be draw in the first match of the bracket stage.
+ 
+---
+ 
+###Tiers`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<ul><li><p>Playin Stage</p><ul><li>8 teams participate</li><li>Teams are drawn into two double elimination brackets</li><li>Bracket matches are best of three</li><li>LCQ match is best of five</li><li>Winners of each group and the winner of the LCQ match between the lower bracket winners advance to Stage 2</li></ul></li><li><p>Bracket Stage</p><ul><li>8 teams participate</li><li>Double elimination bracket</li><li>All matches are Best of 5</li><li>Teams are drawn into the bracket with teams from tier 1 and 2 playing teams from tier 3.</li><li>Teams from tier 1 are placed on the opposite side of the bracket.</li><li>Teams from the same region can&#x27;t be draw in the first match of the bracket stage.</li></ul></li></ul><hr><h3>Tiers</h3>'
+		);
+	});
 });
 
 describe('nested unorderedlists', () => {
