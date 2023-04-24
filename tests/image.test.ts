@@ -58,6 +58,33 @@ describe('image', () => {
 		);
 	});
 
+	test('reddit emoji image with t === emoji', () => {
+		const media_metadata = {
+			'emote|t5_3p20d|7011': {
+				status: 'valid',
+				e: 'Image',
+				m: 'image/png',
+				s: {
+					y: 20,
+					x: 20,
+					u: 'https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/LHRStlVvWY.png'
+				},
+				t: 'emoji',
+				id: 'emote|t5_3p20d|7011'
+			} as const
+		};
+
+		const htmlResult = converter(
+			`*This is what I play Azur Lane for*\n\n![img](emote|t5_3p20d|7011)`,
+			{
+				media_metadata
+			}
+		);
+		expect(htmlResult).toBe(
+			'<p><em>This is what I play Azur Lane for</em></p><p><img src="https://reddit-econ-prod-assets-permanent.s3.amazonaws.com/asset-manager/t5_3p20d/LHRStlVvWY.png" alt="img" width="20" height="20"></p>'
+		);
+	});
+
 	test('reddit emoji many', () => {
 		const media_metadata = {
 			'emote|t5_3p20d|14001': {

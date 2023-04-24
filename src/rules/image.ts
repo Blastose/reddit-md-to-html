@@ -45,7 +45,7 @@ export const image: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaul
 			title: capture[3]?.replace(/\\"/g, '"'),
 			width: source.x,
 			height: source.y,
-			isEmoji: metadata.t === 'sticker'
+			isEmoji: metadata.t === 'sticker' || metadata.t === 'emoji'
 		};
 		return image;
 	} satisfies SimpleMarkdown.ParseFunction,
@@ -104,7 +104,7 @@ export const redditImage: SimpleMarkdownRule = {
 			title: capture[3]?.replace(/\\/g, ''),
 			width: source.x,
 			height: source.y,
-			isEmoji: metadata.t === 'sticker',
+			isEmoji: metadata.t === 'sticker' || metadata.t === 'emoji',
 			isGif: metadata.e === 'AnimatedImage',
 			ext: ext
 		};
