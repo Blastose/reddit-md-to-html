@@ -7,13 +7,9 @@ export const superscript: SimpleMarkdownRule = {
 		// If the superscript is in a table, we need to use a modified verision of the
 		// match regex to stop matching at `|` (table separator)
 		if (state.isTable) {
-			return SimpleMarkdown.inlineRegex(/^\^+\(([^)]+)\)|^\^+([^\s^|]+)/)(
-				source,
-				state,
-				prevCapture
-			);
+			return SimpleMarkdown.inlineRegex(/^\^+(?:\((.+)\)|([^\s^|]+))/)(source, state, prevCapture);
 		}
-		return SimpleMarkdown.inlineRegex(/^\^+(\[[^\]]*\]\([^ ]*\))|^\^+\(([^)]+)\)|^\^+([^\s^]+)/)(
+		return SimpleMarkdown.inlineRegex(/^\^+(?:(\[[^\]]*\]\([^ ]*\))|\((.+)\)|([^\s^]+))/)(
 			source,
 			state,
 			prevCapture

@@ -50,6 +50,15 @@ describe('superscript', () => {
 		);
 	});
 
+	test('superscript with url []() in () part of ^()', () => {
+		const text = `^([Click here](https://www.reddit.com/message/compose?to=LuckyNumber-Bot&subject=Stalk%20Me%20Pls&message=%2Fstalkme) to have me scan all your future comments.) \\
+^(Summon me on specific comments with u/LuckyNumber-Bot.)`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<p><sup><a href="https://www.reddit.com/message/compose?to=LuckyNumber-Bot&amp;subject=Stalk%20Me%20Pls&amp;message=%2Fstalkme" rel="noopener nofollow ugc">Click here</a> to have me scan all your future comments.</sup> <br><sup>Summon me on specific comments with <a href="/u/LuckyNumber-Bot" rel="noopener nofollow ugc">u/LuckyNumber-Bot</a>.</sup></p>'
+		);
+	});
+
 	// Inconsistent with both new and old reddit
 	test.fails('superscript with em', () => {
 		const htmlResult = converter('^(superscript-_+_++_+_++++___+_+__******#**!#@$#${}[])');
