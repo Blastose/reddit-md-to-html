@@ -31,8 +31,10 @@ export const list: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 		// since prevCaptureStr will now be a ` `.
 		// To prevent this, we simply check if the start of the source is a space and the previous capture was not empty, and set a flag if it so
 		if (state.skipNextList) {
-			state.skipNextList = false;
-			return null;
+			if (!isStartOfLineCapture || (isStartOfLineCapture && isStartOfLineCapture[0] !== '\n')) {
+				state.skipNextList = false;
+				return null;
+			}
 		}
 		if (source[0] === ' ' && !isStartOfLineCapture) {
 			state.skipNextList = true;
