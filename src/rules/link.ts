@@ -8,6 +8,9 @@ const LINK_INSIDE = '(?:\\[[^\\]]*\\]|[^\\[\\]]|\\](?=[^\\[]*\\]))*';
 const LINK_HREF_AND_TITLE =
 	'\\s*<?((?:\\([^)]*\\)|[^\\\\]|\\\\.)*?)>?(?:\\s+[\'"(]([\\s\\S]*?)[\'")])?\\s*';
 
+// Link regex for easy copy pasting
+// ^\[((?:\[[^\]]*\]|[^[\]]|\](?=[^[]*\]))*)\]\(\s*<?((?:\([^)]*\)|[^\\]|\\.)*?)>?(?:\s+['"(]([\s\S]*?)['")])?\s*\)
+
 // Modifies original link rule to add a state when parsing to tell other rules
 // that the text has already been ran through the link rule
 // Used to prevent double <a> tags
