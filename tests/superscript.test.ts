@@ -59,6 +59,14 @@ describe('superscript', () => {
 		);
 	});
 
+	test('superscript with ) closing immediately', () => {
+		const text = `you have a 3rd party YouTube ^(*or Reddit) client installed that you have set as the Default for YouTube links, this 3rd party client somehow changes the UI so much that you cannot see who (what Channel) the creator is. If that's the case, open the link in your browser of choice, or even pasting the URL into the Search bar in the YouTube app will work. `;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<p>you have a 3rd party YouTube <sup>*or Reddit</sup> client installed that you have set as the Default for YouTube links, this 3rd party client somehow changes the UI so much that you cannot see who (what Channel) the creator is. If that&#x27;s the case, open the link in your browser of choice, or even pasting the URL into the Search bar in the YouTube app will work. </p>'
+		);
+	});
+
 	// Inconsistent with both new and old reddit
 	test.fails('superscript with em', () => {
 		const htmlResult = converter('^(superscript-_+_++_+_++++___+_+__******#**!#@$#${}[])');
