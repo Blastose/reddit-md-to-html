@@ -62,4 +62,20 @@ describe('lheading', () => {
 			'<h2>Reproducible Steps:</h2><ol start="1"><li></li><li></li><li></li></ol>'
 		);
 	});
+
+	test('underline heading does not match triple backticks with --- under the ```', () => {
+		const text = `\`\`\`
+---
+title: Example
+---
+
+this is an example
+\`\`\``;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(`<pre><code>---
+title: Example
+---
+
+this is an example</code></pre>`);
+	});
 });

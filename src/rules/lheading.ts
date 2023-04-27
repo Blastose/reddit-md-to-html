@@ -7,7 +7,7 @@ export const lheading: SimpleMarkdownRule = Object.assign(
 	SimpleMarkdown.defaultRules.lheading,
 	{
 		match: SimpleMarkdown.blockRegex(
-			/^([^\n]+)\n *(=|-){3,} *(?:\n *)+/
+			/^(?!```)([^\n]+)\n *(=|-){3,} *(?:\n *)+/
 		) satisfies SimpleMarkdown.MatchFunction
 	}
 );
