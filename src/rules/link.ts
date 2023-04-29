@@ -58,7 +58,7 @@ export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.default
 export const linkBackwards: SimpleMarkdownRule = {
 	order: SimpleMarkdown.defaultRules.link.order - 0.5,
 	match: SimpleMarkdown.inlineRegex(
-		/^\[(https?:\/\/\s*<?(?:(?:\([^)]*\)|[^\s\\]|\\.)*?)>?(?:\s+['"(]([\s\S]*?)['")])?\s*)\]\((?!https?:\/\/)(?:\[[^\]]*\]|[^[\]]|\](?=[^[]*\]))*\)/
+		/^\[(https?:\/\/[\S]*)\]\((?!https?:\/\/)(?:\[[^\]]*\]|[^[\]]|\](?=[^[]*\]))*\)/
 	),
 	parse: function (capture, _parse, state) {
 		return {
