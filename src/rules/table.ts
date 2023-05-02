@@ -101,7 +101,7 @@ const TABLES = (function () {
 
 	return {
 		parseTable: parseTable(true),
-		TABLE_REGEX: /^ *(.+\|.*)\n *\|?( *[-:]+[-| :]*)\n((?: *.*\|.*(?:\n|$))*)(?: *\n *)*/
+		TABLE_REGEX: /^ *(.+\|?.*)\n *\|?( *[-:]+[-| :]*)\n((?: *.*\|.*(?:\n|$))*)(?: *\n *)*/
 	};
 })();
 

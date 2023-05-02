@@ -155,4 +155,18 @@ This is how it looks: >!spoiler text goes here!<`;
 			'<h4>Tier 1</h4><table><thead><tr><th style="text-align:center;" scope="col">Team</th><th style="text-align:center;" scope="col">Information</th><th style="text-align:left;" scope="col">League</th></tr></thead><tbody><tr><td style="text-align:center;">GEN</td><td style="text-align:center;"><a href="https://lol.fandom.com/wiki/Gen.G" rel="noopener nofollow ugc">Leaguepedia</a></td><td style="text-align:left;">LCK</td></tr><tr><td style="text-align:center;">JDG Intel Esports Club</td><td style="text-align:center;"><a href="https://lol.fandom.com/wiki/JD_Gaming" rel="noopener nofollow ugc">Leaguepedia</a></td><td style="text-align:left;">LPL</td></tr></tbody></table><h4>Tier 2</h4><table><thead><tr><th style="text-align:center;" scope="col">Team</th><th style="text-align:center;" scope="col">Information</th><th style="text-align:left;" scope="col">League</th></tr></thead><tbody><tr><td style="text-align:center;">MAD Lions</td><td style="text-align:center;"><a href="https://lol.fandom.com/wiki/MAD_Lions" rel="noopener nofollow ugc">Leaguepedia</a></td><td style="text-align:left;">LEC</td></tr><tr><td style="text-align:center;">Cloud9</td><td style="text-align:center;"><a href="https://lol.fandom.com/wiki/Cloud9" rel="noopener nofollow ugc">Leaguepedia</a></td><td style="text-align:left;">LCS</td></tr></tbody></table>'
 		);
 	});
+
+	test('table with no | at the end of the first line', () => {
+		const text = `###On-Air Team
+
+|Desk Host
+|:---
+| Eefje "[Sjokz](https://twitter.com/sjokz)" Depoortere |
+| Trevor "[Quickshot](https://twitter.com/Quickshot)" Henry | 
+---`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<h3>On-Air Team</h3><table><thead><tr><th style="text-align:left;" scope="col">Desk Host</th></tr></thead><tbody><tr><td style="text-align:left;">Eefje &quot;<a href="https://twitter.com/sjokz" rel="noopener nofollow ugc">Sjokz</a>&quot; Depoortere</td></tr><tr><td style="text-align:left;">Trevor &quot;<a href="https://twitter.com/Quickshot" rel="noopener nofollow ugc">Quickshot</a>&quot; Henry</td></tr></tbody></table><hr>'
+		);
+	});
 });
