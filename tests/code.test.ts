@@ -72,6 +72,28 @@ function (b: number) {
 		expect(htmlResult).toBe(`<pre><code>&lt;Dorohedoro&gt;
 &lt;Golden Kamuy&gt;</code></pre>`);
 	});
+
+	test('4 spaces codeblock with space in middle of 4 spaces lines', () => {
+		const text = `    export const load = (async (event) => {
+        const { jwt } = await event.parent(); // gets the JWT from the layout.server.ts <- IMPORTANT
+        let api = new ApiHelper(jwt)
+        var data = await api.client.getSomeDataFromMyApi();
+ 
+        return {
+            data
+        };
+    }) satisfies PageLoad;`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(`<pre><code>export const load = (async (event) =&gt; {
+    const { jwt } = await event.parent(); // gets the JWT from the layout.server.ts &lt;- IMPORTANT
+    let api = new ApiHelper(jwt)
+    var data = await api.client.getSomeDataFromMyApi();
+ 
+    return {
+        data
+    };
+}) satisfies PageLoad;</code></pre>`);
+	});
 });
 
 describe('inlineCode', () => {

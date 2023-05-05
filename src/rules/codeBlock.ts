@@ -10,7 +10,7 @@ export const codeBlock: SimpleMarkdownRule = Object.assign(
 	SimpleMarkdown.defaultRules.codeBlock,
 	{
 		match: SimpleMarkdown.blockRegex(
-			/^(?: {4}[^\n]+\n*)(?: {4}[^\n]*\n*)*(?:\n)*\n/
+			/^(?: {4}[^\n]+\n*)(?:(?: |\n)* {4}[^\n]*\n*)*(?:\n)*\n/
 		) satisfies SimpleMarkdown.MatchFunction
 	}
 );
