@@ -14,7 +14,7 @@ export const nonOrderedList: SimpleMarkdownRule = {
 	parse: function (capture, parse, state) {
 		state.notOrderedList = true;
 		return {
-			content: parse(capture[1], state)
+			content: SimpleMarkdown.parseInline(parse, capture[1], state)
 		};
 	},
 	html: function (node, output, state) {
