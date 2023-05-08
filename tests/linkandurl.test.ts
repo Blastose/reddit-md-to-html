@@ -177,6 +177,13 @@ describe('url', () => {
 			'<p><a href="https://www.google.com/search?q=Markup+(business)" rel="noopener nofollow ugc">www.google.com/search?q=Markup+(business)</a>))</p>'
 		);
 	});
+
+	test('url with ] at end', () => {
+		const htmlResult = converter('[edit for reference: https://builtwith.com/elf.tech]');
+		expect(htmlResult).toBe(
+			'<p>[edit for reference: <a href="https://builtwith.com/elf.tech" rel="noopener nofollow ugc">https://builtwith.com/elf.tech</a>]</p>'
+		);
+	});
 });
 
 describe('url but []() are [link](text)', () => {
