@@ -20,6 +20,7 @@ import { fence } from './rules/fence.js';
 import { codeBlock } from './rules/codeBlock.js';
 import { image, redditImage } from './rules/image.js';
 import { reflink } from './rules/reflink.js';
+import { strong } from './rules/strong.js';
 import { Options } from './options.js';
 import SimpleMarkdown from 'simple-markdown';
 
@@ -50,7 +51,8 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	codeBlock,
 	image,
 	redditImage,
-	reflink
+	reflink,
+	strong
 });
 
 const parser = SimpleMarkdown.parserFor(rules);
