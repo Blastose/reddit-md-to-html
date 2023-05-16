@@ -23,6 +23,15 @@ it is all within yourself, in your [way of thinking][wot].
 it is all within yourself, in your <a href="https://www.reddit.com/r/ChangeMyView/" rel="noopener nofollow ugc">way of thinking</a>.</p>`);
 	});
 
+	test('reflink does not convert when [link]: is not found ', () => {
+		const text =
+			"I miss bbcode formatting. Something simple and easy to remember for formatting that you can't screw up or accidentally cause. To quote was simply [quote] [/quote] spoiler is [spoiler] [/spoiler]. It was easy to understand and use. No dumb symbol use where you may accidentally invoke or whatever.";
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<p>I miss bbcode formatting. Something simple and easy to remember for formatting that you can&#x27;t screw up or accidentally cause. To quote was simply [quote] [/quote] spoiler is [spoiler] [/spoiler]. It was easy to understand and use. No dumb symbol use where you may accidentally invoke or whatever.</p>'
+		);
+	});
+
 	test('does not convert []', () => {
 		const text = `[Very little]`;
 		const htmlResult = converter(text);
