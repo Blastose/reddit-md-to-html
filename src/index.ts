@@ -21,6 +21,7 @@ import { codeBlock } from './rules/codeBlock.js';
 import { image, redditImage } from './rules/image.js';
 import { reflink } from './rules/reflink.js';
 import { strong } from './rules/strong.js';
+import { def } from './rules/def.js';
 import { Options } from './options.js';
 import SimpleMarkdown from 'simple-markdown';
 
@@ -52,6 +53,7 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	image,
 	redditImage,
 	reflink,
+	def,
 	strong
 });
 
