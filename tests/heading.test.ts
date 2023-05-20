@@ -42,6 +42,11 @@ pub enum Error {
     Config(#[from] config::Error),
 }</code></pre>`);
 	});
+
+	test('heading with nothing after #', () => {
+		const htmlResult = converter('#');
+		expect(htmlResult).toBe('');
+	});
 });
 
 describe('lheading', () => {
