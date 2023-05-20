@@ -169,4 +169,14 @@ This is how it looks: >!spoiler text goes here!<`;
 			'<h3>On-Air Team</h3><table><thead><tr><th style="text-align:left;" scope="col">Desk Host</th></tr></thead><tbody><tr><td style="text-align:left;">Eefje &quot;<a href="https://twitter.com/sjokz" rel="noopener nofollow ugc">Sjokz</a>&quot; Depoortere</td></tr><tr><td style="text-align:left;">Trevor &quot;<a href="https://twitter.com/Quickshot" rel="noopener nofollow ugc">Quickshot</a>&quot; Henry</td></tr></tbody></table><hr>'
 		);
 	});
+
+	test('table with new line after initial pipe', () => {
+		const text = `|
+Detecting multiple leviathan class lifeforms in the region. Are you certain whatever you're doing is worth it?|
+|:-|`;
+		const htmlResult = converter(text);
+		// For some reason, new reddit outputs the `th` with text-align:center
+		expect(htmlResult).toBe(`<table><thead><tr><th style="text-align:left;" scope="col">
+Detecting multiple leviathan class lifeforms in the region. Are you certain whatever you&#x27;re doing is worth it?</th></tr></thead><tbody></tbody></table>`);
+	});
 });
