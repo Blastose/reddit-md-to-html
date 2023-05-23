@@ -8,7 +8,7 @@ import { brBackslash } from './rules/brBackslash.js';
 import { u } from './rules/u.js';
 import { redditlink } from './rules/redditlink.js';
 import { nonOrderedList } from './rules/nonOrderedList.js';
-import { htmlEntities } from './rules/htmlEntities.js';
+import { htmlEntities, htmlEntitiesBlock } from './rules/htmlEntities.js';
 import { link, linkBackwards, redditImageLink } from './rules/link.js';
 import { autolink } from './rules/autolink.js';
 import { url, redditImageUrl } from './rules/url.js';
@@ -32,6 +32,7 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	redditlink,
 	nonOrderedList,
 	htmlEntities,
+	htmlEntitiesBlock,
 	paragraph,
 	heading,
 	lheading,

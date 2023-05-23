@@ -1,6 +1,6 @@
 {
 	"name": "reddit-md-to-html",
-	"version": "0.1.63",
+	"version": "0.1.64",
 	"description": "A markdown to html converter for Reddit-flavored markdown",
 	"repository": {
 		"type": "git",
