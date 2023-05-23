@@ -47,6 +47,15 @@ pub enum Error {
 		const htmlResult = converter('#');
 		expect(htmlResult).toBe('');
 	});
+
+	test('heading with htmlEntity before #', () => {
+		const text = `&nbsp;
+###[Event Overview](https://imgur.com/a/CUI6Y9f)`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<p>&nbsp;</p><h3><a href="https://imgur.com/a/CUI6Y9f" rel="noopener nofollow ugc">Event Overview</a></h3>'
+		);
+	});
 });
 
 describe('lheading', () => {
