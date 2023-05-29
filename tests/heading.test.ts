@@ -56,6 +56,13 @@ pub enum Error {
 			'<p>&nbsp;</p><h3><a href="https://imgur.com/a/CUI6Y9f" rel="noopener nofollow ugc">Event Overview</a></h3>'
 		);
 	});
+
+	test('heading with 1 new line before #', () => {
+		const text = `Words here
+#More words here too`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe('<p>Words here</p><h1>More words here too</h1>');
+	});
 });
 
 describe('lheading', () => {

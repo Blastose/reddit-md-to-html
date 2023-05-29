@@ -72,4 +72,15 @@ Okay, I think I get it now, this isn't a set of systems, but instead a set of la
 			`<p>Really exciting seeing more updates from Bevy!</p><p>Might be a dumb question but I really don&#x27;t understand the <code>in_set</code> function from this post.</p><blockquote><p>You can add systems to sets by calling the <code>in_set</code> method:</p></blockquote><blockquote><p>app.add_system(gravity.in_set(PhysicsSet::Movement))</p></blockquote><p>Are we adding <code>gravity</code> to <code>PhysicsSet</code>? Why did we mention <code>Movement</code> then? Does this have to be added to a set inside a <code>app.add_system()</code> call? I feel like the other examples and docs don&#x27;t help explain what is going on here...</p><p>...</p><p>Okay, I think I get it now, this isn&#x27;t a set of systems, but instead a set of labels. I&#x27;m going to post my comment anyways because I personally found this very confusing, and I think the naming could use some work. Sounds amazingly powerful now that I understand it correctly.</p>`
 		);
 	});
+
+	test('blockquote after 1 new line', () => {
+		const text = `Open Windows PowerShell and paste this in
+> console.log("this doesn't work in powershell")")
+
+Hit enter.`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			`<p>Open Windows PowerShell and paste this in</p><blockquote><p>console.log(&quot;this doesn&#x27;t work in powershell&quot;)&quot;)</p></blockquote><p>Hit enter.</p>`
+		);
+	});
 });
