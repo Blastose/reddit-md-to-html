@@ -16,12 +16,15 @@ export const redditlink: SimpleMarkdownRule = {
 		// The reason we are using state.prevCapture is that prevCapture only contains
 		// what was previous, while state.prevCapture is an array containing the entire line,
 		// not only what was matched
+		// We test a regex match on prevCapture since if the character before is not a letter (e.g. a `(`),
+		// then it should match
 		if (
 			state.prevCapture &&
 			state.prevCapture.length > 0 &&
 			state.prevCapture[0][state.prevCapture[0].length - 1] !== '\n' &&
 			prevCapture.length !== 0 &&
-			prevCapture[prevCapture.length - 1] !== ' '
+			prevCapture[prevCapture.length - 1] !== ' ' &&
+			/^\w+/.test(prevCapture)
 		) {
 			return null;
 		}

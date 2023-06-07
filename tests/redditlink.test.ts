@@ -56,6 +56,13 @@ EDIT: oh damn, I think OP blocked me. Sorry, OP, I didn't mean any offence. r/pr
 			'<p><a href="/r/burnt" rel="noopener nofollow ugc">r/burnt</a>-baco_n</p>'
 		);
 	});
+
+	test('parenthesis before subreddit link', () => {
+		const htmlResult = converter('(r/burnt-baco_n');
+		expect(htmlResult).toBe(
+			'<p>(<a href="/r/burnt" rel="noopener nofollow ugc">r/burnt</a>-baco_n</p>'
+		);
+	});
 });
 
 describe('userlink', () => {
