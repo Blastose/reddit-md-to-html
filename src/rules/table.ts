@@ -105,6 +105,10 @@ const TABLES = (function () {
 	};
 })();
 
+function isEmptyTbody(cells: any[]) {
+	return cells.length === 1 && cells[0].length === 1 && cells[0][0].length === 0;
+}
+
 // Modifies original table rule to match loosely
 // The loose match does not require `|` to be at the start of a table row
 // Modifies html function to not output more columns than the number of header columns
@@ -130,7 +134,7 @@ export const table: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaul
 
 		const rows = node.cells
 			.map(function (row: SimpleMarkdown.ASTNode) {
-				const rowLimitedCols = row.splice(0, numColsInHeader);
+				const rowLimitedCols = row.slice(0, numColsInHeader);
 				const cols = rowLimitedCols
 					.map(function (content: SimpleMarkdown.ASTNode, c: number) {
 						return SimpleMarkdown.htmlTag('td', output(content, state), { style: getStyle(c) });
@@ -143,7 +147,7 @@ export const table: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaul
 
 		const thead = SimpleMarkdown.htmlTag('thead', SimpleMarkdown.htmlTag('tr', headers));
 		let tbody = SimpleMarkdown.htmlTag('tbody', '');
-		if (!(node.cells.length === 1 && node.cells[0].length === 0)) {
+		if (!isEmptyTbody(node.cells)) {
 			tbody = SimpleMarkdown.htmlTag('tbody', rows);
 		}
 

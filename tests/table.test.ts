@@ -179,4 +179,14 @@ Detecting multiple leviathan class lifeforms in the region. Are you certain what
 		expect(htmlResult).toBe(`<table><thead><tr><th style="text-align:left;" scope="col">
 Detecting multiple leviathan class lifeforms in the region. Are you certain whatever you&#x27;re doing is worth it?</th></tr></thead><tbody></tbody></table>`);
 	});
+
+	test('table with one row', () => {
+		const text = `|Name|Rough Area|Cuisine|Known For (* = other things also good)|Comments|Posts|Reddit Exposure|
+:--|:--|:--|:--|--:|--:|--:|
+|Bangkok City Cafe|Kitsilano|Thai||1|0|1|`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			`<table><thead><tr><th style="text-align:left;" scope="col">Name</th><th style="text-align:left;" scope="col">Rough Area</th><th style="text-align:left;" scope="col">Cuisine</th><th style="text-align:left;" scope="col">Known For (* = other things also good)</th><th style="text-align:right;" scope="col">Comments</th><th style="text-align:right;" scope="col">Posts</th><th style="text-align:right;" scope="col">Reddit Exposure</th></tr></thead><tbody><tr><td style="text-align:left;">Bangkok City Cafe</td><td style="text-align:left;">Kitsilano</td><td style="text-align:left;">Thai</td><td style="text-align:left;"></td><td style="text-align:right;">1</td><td style="text-align:right;">0</td><td style="text-align:right;">1</td></tr></tbody></table>`
+		);
+	});
 });
