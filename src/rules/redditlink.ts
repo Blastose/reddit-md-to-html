@@ -24,7 +24,7 @@ export const redditlink: SimpleMarkdownRule = {
 			state.prevCapture[0][state.prevCapture[0].length - 1] !== '\n' &&
 			prevCapture.length !== 0 &&
 			prevCapture[prevCapture.length - 1] !== ' ' &&
-			/^\w+/.test(prevCapture)
+			/^.*\w+/.test(prevCapture)
 		) {
 			return null;
 		}

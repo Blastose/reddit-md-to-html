@@ -50,6 +50,15 @@ EDIT: oh damn, I think OP blocked me. Sorry, OP, I didn't mean any offence. r/pr
 		expect(htmlResult).toBe('<p>converter/function</p>');
 	});
 
+	test('does not match `text`r/`subreddit` in connected word with text in front', () => {
+		const htmlResult = converter(
+			"Which it's so makes twitter/youtube/twitch like badges of honor."
+		);
+		expect(htmlResult).toBe(
+			'<p>Which it&#x27;s so makes twitter/youtube/twitch like badges of honor.</p>'
+		);
+	});
+
 	test('stops when non-character/number in subreddit name', () => {
 		const htmlResult = converter('r/burnt-baco_n');
 		expect(htmlResult).toBe(
