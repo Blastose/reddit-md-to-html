@@ -1,6 +1,6 @@
 import SimpleMarkdown from 'simple-markdown';
 import { SimpleMarkdownRule } from './ruleType.js';
-import { MediaMetadataImage } from '../options.js';
+import { MediaMetadataGif, MediaMetadataImage } from '../options.js';
 
 // Modifies original url regex to include www.
 export const urlRegex = /^((?:https?):\/\/|www\.)(?:[a-zA-Z0-9-]+\.?)+[^\s<]*/;
@@ -62,6 +62,45 @@ export const redditImageUrl: SimpleMarkdownRule = {
 				type: 'redditImage',
 				alt: 'img',
 				target: SimpleMarkdown.unescapeUrl(metadata.s.u),
+				title: undefined,
+				width: metadata.s.x,
+				height: metadata.s.y
+			};
+		}
+
+		// If we do not have the image in media_metadata, we just return a normal link
+		const link = {
+			type: 'link',
+			addTargetBlank: state.options?.addTargetBlank,
+			content: [
+				{
+					type: 'text',
+					content: capture[1]
+				}
+			],
+			target: capture[1],
+			title: undefined,
+			useParagraphWrapper: true
+		};
+		return link;
+	},
+	html: null
+};
+
+export const redditGifUrl: SimpleMarkdownRule = {
+	order: SimpleMarkdown.defaultRules.heading.order - 0.5,
+	match: SimpleMarkdown.blockRegex(/^(https:\/\/i\.redd\.it\/(.*)\..*)\n*/),
+	parse: function (capture, _parse, state) {
+		if (
+			state.options?.media_metadata &&
+			state.options?.media_metadata[capture[2]] &&
+			state.options.media_metadata[capture[2]].e === 'AnimatedImage'
+		) {
+			const metadata = state.options.media_metadata[capture[2]] as MediaMetadataGif;
+			return {
+				type: 'redditImage',
+				alt: 'img',
+				target: SimpleMarkdown.unescapeUrl(metadata.s.gif),
 				title: undefined,
 				width: metadata.s.x,
 				height: metadata.s.y

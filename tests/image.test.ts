@@ -136,6 +136,51 @@ describe('image', () => {
 		);
 	});
 
+	test('reddit gif url', () => {
+		const media_metadata = {
+			arhx59tcah6c1: {
+				status: 'valid',
+				e: 'AnimatedImage',
+				m: 'image/gif',
+				p: [
+					{
+						y: 72,
+						x: 108,
+						u: 'https://preview.redd.it/arhx59tcah6c1.gif?width=108&crop=smart&format=png8&s=8515ba80139d3edd87e4e91cf8991c7df0eeb147'
+					},
+					{
+						y: 144,
+						x: 216,
+						u: 'https://preview.redd.it/arhx59tcah6c1.gif?width=216&crop=smart&format=png8&s=b4e92b6a3e61e291625fe24fedd9ea3b2af7bab3'
+					},
+					{
+						y: 213,
+						x: 320,
+						u: 'https://preview.redd.it/arhx59tcah6c1.gif?width=320&crop=smart&format=png8&s=bfaf7495ca1d1e49a6c195da39cb01ccd29b8a6f'
+					},
+					{
+						y: 426,
+						x: 640,
+						u: 'https://preview.redd.it/arhx59tcah6c1.gif?width=640&crop=smart&format=png8&s=c522fc6fc10999f4f30262df81d0f116c3f0c7f1'
+					}
+				],
+				s: {
+					y: 480,
+					gif: 'https://i.redd.it/arhx59tcah6c1.gif',
+					mp4: 'https://preview.redd.it/arhx59tcah6c1.gif?format=mp4&s=179cb7443b78096922092fec961eb3b1432062d0',
+					x: 720
+				},
+				id: 'arhx59tcah6c1'
+			} as const
+		};
+
+		const text = 'https://i.redd.it/arhx59tcah6c1.gif';
+		const htmlResult = converter(text, { media_metadata });
+		expect(htmlResult).toBe(
+			'<div class="reddit-image-container"><a href="https://i.redd.it/arhx59tcah6c1.gif" rel="noopener nofollow ugc" target="_blank"><img src="https://i.redd.it/arhx59tcah6c1.gif" alt="img" width="720" height="480" class="reddit-image"></a></div>'
+		);
+	});
+
 	test('reddit image using ![]()', () => {
 		const media_metadata = {
 			'8zyvax9yjmta1': {

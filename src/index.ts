@@ -11,7 +11,7 @@ import { nonOrderedList } from './rules/nonOrderedList.js';
 import { htmlEntities, htmlEntitiesBlock } from './rules/htmlEntities.js';
 import { link, linkBackwards, redditImageLink } from './rules/link.js';
 import { autolink } from './rules/autolink.js';
-import { url, redditImageUrl } from './rules/url.js';
+import { url, redditImageUrl, redditGifUrl } from './rules/url.js';
 import { list } from './rules/list.js';
 import { text } from './rules/text.js';
 import { hr } from './rules/hr.js';
@@ -44,6 +44,7 @@ const rules = Object.assign({}, SimpleMarkdown.defaultRules, {
 	autolink,
 	url,
 	redditImageUrl,
+	redditGifUrl,
 	list,
 	text,
 	hr,
