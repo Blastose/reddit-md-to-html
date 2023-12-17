@@ -72,6 +72,17 @@ EDIT: oh damn, I think OP blocked me. Sorry, OP, I didn't mean any offence. r/pr
 			'<p>(<a href="/r/burnt" rel="noopener nofollow ugc">r/burnt</a>-baco_n</p>'
 		);
 	});
+
+	test('subreddit links in an unordered list', () => {
+		const text = `- /r/Hololive
+- /r/Nijisanji
+- /r/VShojo
+- /r/4VLive`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<ul><li><a href="/r/Hololive" rel="noopener nofollow ugc">/r/Hololive</a></li><li><a href="/r/Nijisanji" rel="noopener nofollow ugc">/r/Nijisanji</a></li><li><a href="/r/VShojo" rel="noopener nofollow ugc">/r/VShojo</a></li><li><a href="/r/4VLive" rel="noopener nofollow ugc">/r/4VLive</a></li></ul>'
+		);
+	});
 });
 
 describe('userlink', () => {

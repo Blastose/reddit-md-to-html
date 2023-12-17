@@ -18,13 +18,16 @@ export const redditlink: SimpleMarkdownRule = {
 		// not only what was matched
 		// We test a regex match on prevCapture since if the character before is not a letter (e.g. a `(`),
 		// then it should match
+		// We also test a regex match if the source starts does not start with /r|u/
+		// since we need to match those
 		if (
 			state.prevCapture &&
 			state.prevCapture.length > 0 &&
 			state.prevCapture[0][state.prevCapture[0].length - 1] !== '\n' &&
 			prevCapture.length !== 0 &&
 			prevCapture[prevCapture.length - 1] !== ' ' &&
-			/^.*\w+/.test(prevCapture)
+			/^.*\w+/.test(prevCapture) &&
+			!/^\/r|u\//.test(source)
 		) {
 			return null;
 		}
