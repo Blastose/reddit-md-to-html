@@ -132,4 +132,13 @@ u/repostsleuthbot`;
 			'<p><a href="/u/burnt-baco_n" rel="noopener nofollow ugc">u/burnt-baco_n</a></p>'
 		);
 	});
+
+	test('does not match `text`u/`username` in connected word with text in front', () => {
+		const htmlResult = converter(
+			"You'll find plenty of reports by quickly searching in this sub. Just because a bug doesn't happen to you/everyone, doesn't mean it's due to a connection issue"
+		);
+		expect(htmlResult).toBe(
+			'<p>You&#x27;ll find plenty of reports by quickly searching in this sub. Just because a bug doesn&#x27;t happen to you/everyone, doesn&#x27;t mean it&#x27;s due to a connection issue</p>'
+		);
+	});
 });
