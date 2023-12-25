@@ -100,6 +100,14 @@ https://preview.redd.it/gtec70b1uroa1.png?width=831&format=png&auto=webp&v=enabl
 			'<p><a href="https://www.google.com" rel="noopener nofollow ugc">ice creams</a></p>'
 		);
 	});
+
+	test('link with new line between [] and ()', () => {
+		const text = `[ice creams]\n(https://www.google.com)`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<p><a href="https://www.google.com" rel="noopener nofollow ugc">ice creams</a></p>'
+		);
+	});
 });
 
 describe('url', () => {

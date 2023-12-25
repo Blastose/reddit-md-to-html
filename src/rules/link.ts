@@ -18,7 +18,7 @@ const LINK_HREF_AND_TITLE =
 // Also outputs prepends https:// to of www. links
 export const link: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.link, {
 	match: SimpleMarkdown.inlineRegex(
-		new RegExp('^\\[(' + LINK_INSIDE + ')\\] *\\(' + LINK_HREF_AND_TITLE + '\\)')
+		new RegExp('^\\[(' + LINK_INSIDE + ')\\](?: |\n)*\\(' + LINK_HREF_AND_TITLE + '\\)')
 	) satisfies SimpleMarkdown.MatchFunction,
 	parse: function (capture, parse, state) {
 		state.link = true;
