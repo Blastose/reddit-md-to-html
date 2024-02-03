@@ -14,6 +14,18 @@ describe('table', () => {
 		);
 	});
 
+	test('table with no | start or ends', () => {
+		const text = `Episode|Link|Score
+:--|:-:|:-:
+1|http://redd.it/4d81ks|
+2|http://redd.it/4e6p7b|
+15|http://redd.it/4s6g7i|8.75`;
+		const htmlResult = converter(text);
+		expect(htmlResult).toBe(
+			'<table><thead><tr><th style="text-align:left;" scope="col">Episode</th><th style="text-align:center;" scope="col">Link</th><th style="text-align:center;" scope="col">Score</th></tr></thead><tbody><tr><td style="text-align:left;">1</td><td style="text-align:center;"><a href="http://redd.it/4d81ks" rel="noopener nofollow ugc">http://redd.it/4d81ks</a></td></tr><tr><td style="text-align:left;">2</td><td style="text-align:center;"><a href="http://redd.it/4e6p7b" rel="noopener nofollow ugc">http://redd.it/4e6p7b</a></td></tr><tr><td style="text-align:left;">15</td><td style="text-align:center;"><a href="http://redd.it/4s6g7i" rel="noopener nofollow ugc">http://redd.it/4s6g7i</a></td><td style="text-align:center;">8.75</td></tr></tbody></table>'
+		);
+	});
+
 	test('table with no | endings', () => {
 		const text = `|Lorem|Ipsum|Dolor
 |-----|-----|-----

@@ -4,12 +4,16 @@ import { MediaMetadataGif, MediaMetadataImage } from '../options.js';
 
 // Modifies original url regex to include www.
 export const urlRegex = /^((?:https?):\/\/|www\.)(?:[a-zA-Z0-9-]+\.?)+[^\s<]*/;
+export const urlRegexForTables = /^((?:https?):\/\/|www\.)(?:[a-zA-Z0-9-]+\.?)+[^|\s<]*/;
 
 // Modifies original url rule to ignore urls already parsed by the link rule
 export const url: SimpleMarkdownRule = Object.assign({}, SimpleMarkdown.defaultRules.url, {
 	match: function (source, state, prevCapture) {
 		if (state.link) {
 			return null;
+		}
+		if (state.inTable) {
+			return SimpleMarkdown.inlineRegex(urlRegexForTables)(source, state, prevCapture);
 		}
 		return SimpleMarkdown.inlineRegex(urlRegex)(source, state, prevCapture);
 	} satisfies SimpleMarkdown.MatchFunction,
